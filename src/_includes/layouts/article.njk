@@ -1,0 +1,74 @@
+---
+layout: layouts/base.njk
+---
+{%- import "partials/macros.njk" as m with context -%}
+<article>
+  <header class="bandeau-page fond-sombre">
+    <div class="conteneur bandeau-page__int">
+      <nav class="ariane" aria-label="Fil d'Ariane">
+        <ol>
+          <li><a href="/">Accueil</a></li>
+          <li><a href="/actualites/">Actualités</a></li>
+          <li aria-current="page">{{ rubrique }}</li>
+        </ol>
+      </nav>
+      <div class="article__tete">
+        <p class="surtitre">{{ rubrique }}</p>
+        <h1>{{ title }}</h1>
+        <p class="article__meta">
+          {{ m.ico("calendrier") }}
+          <time datetime="{{ page.date | dateIso }}">{% if precision == "mois" %}{{ page.date | moisAnnee | capitalize }}{% else %}Publié le {{ page.date | dateFr }}{% endif %}</time>
+          {% if source_nom %}<span>· Source : {{ source_nom }}</span>{% endif %}
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <div class="conteneur conteneur--etroit">
+    {% set visuel = image_televersee or image %}
+    {% if visuel %}
+    <figure>
+      <div class="article__image">
+        {{ m.photo(visuel, image_alt, "(min-width: 860px) 820px, 100vw", "", false) }}
+        {{ m.credit(visuel) }}
+      </div>
+      {% if images[visuel] and images[visuel].nature == "illustration" %}
+      <figcaption class="article__legende">Photo d'illustration : elle ne représente ni l'événement décrit, ni une agence ou des clients de U-IMCEC.</figcaption>
+      {% endif %}
+    </figure>
+    {% endif %}
+
+    <div class="article__corps">
+      <p class="chapo">{{ resume }}</p>
+      <div class="prose">{{ content | safe }}</div>
+
+      {% if source_url %}
+      <p class="article__source">
+        {{ m.ico("document") }}
+        <span>Cet article est un résumé rédigé à partir d'une publication de <strong>{{ source_nom }}</strong>{% if source_date %} ({{ source_date }}){% endif %}.
+        <a class="lien-texte" href="{{ source_url }}" target="_blank" rel="noopener">Lire la publication d'origine<span class="sr-only"> (nouvel onglet)</span></a></span>
+      </p>
+      {% elif source_nom %}
+      <p class="article__source">{{ m.ico("document") }}<span>Source : {{ source_nom }}.</span></p>
+      {% endif %}
+
+      {{ m.noteValidation(validation or "Texte rédigé à partir de sources publiques : à relire et valider par U-IMCEC avant publication.") }}
+    </div>
+  </div>
+</article>
+
+<section class="section section--sable" aria-labelledby="suite-titre">
+  <div class="conteneur">
+    <div class="tete-section">
+      <div><p class="surtitre">À lire aussi</p><h2 id="suite-titre">Autres actualités</h2></div>
+      <p class="tete-section__action"><a class="lien" href="/actualites/">Toutes les actualités {{ m.ico("fleche") }}</a></p>
+    </div>
+    <div class="actus__grille actus__grille--liste">
+      {% for article in collections.actualites | sauf(page.url) | limite(3) %}
+      {{ m.carteActu(article, 3) }}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{{ m.appelFinal("Un projet en tête ? Parlons-en.", "Nos conseillers vous accueillent dans les caisses et guichets du réseau U-IMCEC pour étudier votre besoin avec vous.", "sable") }}

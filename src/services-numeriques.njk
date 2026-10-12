@@ -1,0 +1,79 @@
+---
+layout: layouts/base.njk
+title: "Services numériques"
+titre_seo: "Services numériques : application mobile et carte — U-IMCEC"
+description: "Application UIMCEC Mobile, carte GIM-UEMOA, Bank to Wallet, Agency Banking : les services numériques de U-IMCEC pour suivre votre compte où que vous soyez."
+permalink: /services-numeriques/
+---
+{%- import "partials/macros.njk" as m with context -%}
+
+{{ m.bandeau("Vos services, là où vous êtes", numerique.intro, "Services numériques") }}
+
+<section class="section" aria-labelledby="services-titre">
+  <div class="conteneur">
+    <h2 class="sr-only" id="services-titre">Les services numériques de U-IMCEC</h2>
+    <div class="services-num">
+      {% for s in numerique.services %}
+      <article class="service-fiche{% if s.id == 'application' %} service-fiche--large{% endif %} revele" id="{{ s.id }}">
+        <div>
+          <div class="service-fiche__tete">
+            <span class="pastille pastille--brun">{{ m.ico(s.icone) }}</span>
+            <div>
+              <h2>{{ s.titre }}</h2>
+              <p class="service-fiche__resume">{{ s.resume }}</p>
+            </div>
+          </div>
+          <p class="mt-3">{{ s.texte }}</p>
+          {% if s.points | length %}
+          <ul class="coches mt-4" role="list">
+            {% for p in s.points %}<li>{{ m.ico("coche") }}<span>{{ p }}</span></li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% if s.id == "application" %}
+          <p class="actions mt-5">
+            <a class="badge-boutique" href="{{ site.application.google_play }}" target="_blank" rel="noopener">
+              {{ m.ico("telecharger") }}
+              <span><small>Disponible sur</small><strong>Google Play</strong></span>
+              <span class="sr-only">— télécharger {{ site.application.nom }} (nouvel onglet)</span>
+            </a>
+          </p>
+          <p class="service-fiche__source mt-3">Dernière mise à jour de l'application : {{ site.application.mise_a_jour | dateFr }}. L'activation de l'accès se fait auprès de votre caisse.</p>
+          {{ m.noteValidation("Disponibilité sur iPhone (App Store) et modalités d'activation de l'accès : à confirmer par U-IMCEC.") }}
+          {% else %}
+          <p class="mt-3">Pour en bénéficier, adressez-vous à votre caisse : un conseiller vous indique les conditions et les démarches.</p>
+          {% if s.a_completer %}{{ m.noteValidation(s.a_completer) }}{% endif %}
+          <p class="mt-4"><a class="lien" href="/contact/?sujet=numerique">Demander des renseignements {{ m.ico("fleche") }}</a></p>
+          {% endif %}
+        </div>
+        {% if s.id == "application" %}
+        <div>
+          <div class="telephones">
+            <div class="telephone telephone--arriere">{{ m.photo("app-menu", "", "200px") }}</div>
+            <div class="telephone telephone--avant">{{ m.photo("app-accueil", "Écran d'accueil de l'application UIMCEC Mobile : accès aux comptes, aux transferts, au crédit et aux réclamations", "240px") }}</div>
+          </div>
+          <p class="telephones__legende">Captures officielles de l'application (compte de démonstration).</p>
+        </div>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--sable" aria-labelledby="securite-titre">
+  <div class="conteneur">
+    <div class="securite fond-sombre revele">
+      <div>
+        <p class="surtitre">Votre sécurité</p>
+        <h2 id="securite-titre">Trois réflexes pour protéger votre compte.</h2>
+      </div>
+      <ul class="coches mt-4" role="list">
+        {% for regle in numerique.securite %}<li>{{ m.ico("bouclier") }}<span>{{ regle }}</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{{ m.appelFinal("Envie d'activer vos services numériques ?", "Passez dans votre caisse ou écrivez-nous : un conseiller vous indique la marche à suivre.", "sable") }}

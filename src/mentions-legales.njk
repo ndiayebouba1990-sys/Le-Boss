@@ -1,0 +1,42 @@
+---
+layout: layouts/base.njk
+title: "Mentions légales"
+description: "Mentions légales du site de U-IMCEC : éditeur, agrément, hébergement, propriété intellectuelle."
+permalink: /mentions-legales/
+---
+{%- import "partials/macros.njk" as m with context -%}
+
+{{ m.bandeau("Mentions légales", "", "Informations légales") }}
+
+<section class="section">
+  <div class="conteneur conteneur--etroit">
+    {{ m.noteValidation("Modèle à faire relire et compléter par le service juridique de U-IMCEC (directeur de la publication, hébergeur, forme juridique exacte).") }}
+    <div class="prose">
+      <h2>Éditeur du site</h2>
+      <p><strong>{{ site.nom_complet }} ({{ site.nom }})</strong><br>
+      {{ site.coordonnees.adresse_ligne1 }}<br>{{ site.coordonnees.adresse_ligne2 }}<br>
+      Téléphone : <a href="tel:{{ site.coordonnees.telephone | tel }}">{{ site.coordonnees.telephone }}</a><br>
+      E-mail : <a href="mailto:{{ site.coordonnees.email }}">{{ site.coordonnees.email }}</a></p>
+      <p>Directeur de la publication : {% if site.mentions.directeur_publication %}{{ site.mentions.directeur_publication }}{% else %}{{ m.aConfirmer("Nom à compléter") }}{% endif %}</p>
+
+      <h2>Agrément et réglementation</h2>
+      <p>{{ site.nom }} est une institution mutualiste d'épargne et de crédit agréée par le {{ site.reglementaire.autorite }} sous le numéro <strong>{{ site.reglementaire.agrement }}</strong>. Elle est régie par la {{ site.reglementaire.loi }}.</p>
+
+      <h2>Hébergement</h2>
+      <p>{% if site.mentions.hebergeur %}{{ site.mentions.hebergeur }}{% else %}Nom, adresse et téléphone de l'hébergeur {{ m.aConfirmer("À compléter") }}{% endif %}</p>
+
+      <h2>Propriété intellectuelle</h2>
+      <p>Le nom, le logo et les contenus rédactionnels de ce site sont la propriété de {{ site.nom }}, sauf mention contraire. Toute reproduction sans autorisation préalable est interdite.</p>
+      <p>Les photographies sont créditées individuellement : consultez la page <a href="/credits/">Crédits photographiques</a>.</p>
+
+      <h2>Informations sur les produits</h2>
+      <p>Les informations publiées sur ce site sont fournies à titre indicatif et ne constituent pas une offre contractuelle. Les conditions applicables aux produits et services (taux, frais, durées, garanties) sont communiquées en agence, avant tout engagement.</p>
+
+      <h2>Liens externes</h2>
+      <p>Ce site contient des liens vers des sites tiers (cartographie, boutique d'applications, réseaux sociaux, médias). {{ site.nom }} n'est pas responsable de leur contenu.</p>
+
+      <h2>Sécurité</h2>
+      <p>{{ site.nom }} ne vous demandera jamais votre mot de passe, votre code PIN ou votre numéro de carte par e-mail, par téléphone, par SMS ou via un formulaire. En cas de doute, contactez votre caisse.</p>
+    </div>
+  </div>
+</section>

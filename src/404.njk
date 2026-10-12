@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+title: "Page introuvable"
+description: "La page demandée n'existe pas ou a été déplacée."
+permalink: /404.html
+noindex: true
+eleventyExcludeFromCollections: true
+---
+{%- import "partials/macros.njk" as m with context -%}
+<section class="page-erreur">
+  <div class="conteneur conteneur--etroit">
+    <p class="page-erreur__code" aria-hidden="true">404</p>
+    <h1>Cette page est introuvable.</h1>
+    <p class="chapo chapo--centre mt-4">Le site a été réorganisé : l'adresse que vous avez suivie n'existe plus ou a changé. Voici comment retrouver votre chemin.</p>
+    <p class="actions">
+      <a class="btn btn--primaire" href="/">Retour à l'accueil {{ m.ico("fleche", "ico--fleche") }}</a>
+      <a class="btn btn--contour" href="/solutions/">Nos solutions</a>
+      <a class="btn btn--contour" href="/agences/">Trouver une agence</a>
+      <a class="btn btn--contour" href="/contact/">Nous contacter</a>
+    </p>
+  </div>
+</section>

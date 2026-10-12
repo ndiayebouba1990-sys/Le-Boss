@@ -1,0 +1,59 @@
+{
+  "intro": "Carte, application mobile, transferts vers votre porte-monnaie électronique : U-IMCEC met ses services à portée de main. Les conditions d'accès et d'activation vous sont précisées par votre caisse.",
+  "services": [
+    {
+      "id": "application",
+      "icone": "mobile",
+      "titre": "Application UIMCEC Mobile",
+      "resume": "Votre compte dans votre téléphone.",
+      "texte": "L'application mobile banking de U-IMCEC vous permet de suivre votre compte où que vous soyez.",
+      "points": [
+        "Consultation du solde",
+        "Relevé de compte et historique des opérations",
+        "Virement de compte à compte",
+        "Consultation des informations sur vos crédits",
+        "Dépôt d'une réclamation depuis l'application"
+      ],
+      "source": "Fiche officielle Google Play, mise à jour le 27 août 2026",
+      "confirme": true
+    },
+    {
+      "id": "carte",
+      "icone": "carte",
+      "titre": "Carte GIM-UEMOA",
+      "resume": "La carte interbancaire de votre caisse.",
+      "texte": "U-IMCEC propose à ses membres une carte adossée au réseau interbancaire GIM-UEMOA.",
+      "points": [],
+      "a_completer": "Types de cartes, plafonds, tarifs et modalités de demande : à compléter par U-IMCEC.",
+      "source": "Service cité sur le site officiel uimcec.sn",
+      "confirme": true
+    },
+    {
+      "id": "bank-to-wallet",
+      "icone": "transfert",
+      "titre": "Bank to Wallet",
+      "resume": "De votre compte à votre porte-monnaie mobile.",
+      "texte": "Ce service relie votre compte U-IMCEC à votre porte-monnaie électronique pour faciliter vos mouvements d'argent.",
+      "points": [],
+      "a_completer": "Opérateurs partenaires, sens des transferts, plafonds et frais : à compléter par U-IMCEC.",
+      "source": "Service cité sur le site officiel uimcec.sn",
+      "confirme": true
+    },
+    {
+      "id": "agency-banking",
+      "icone": "boutique",
+      "titre": "Agency Banking",
+      "resume": "Des points de service au plus près de chez vous.",
+      "texte": "Avec l'Agency Banking, U-IMCEC rapproche ses services des populations grâce à des points relais.",
+      "points": [],
+      "a_completer": "Opérations disponibles et liste des points relais : à compléter par U-IMCEC.",
+      "source": "Service cité sur le site officiel uimcec.sn",
+      "confirme": true
+    }
+  ],
+  "securite": [
+    "U-IMCEC ne vous demandera jamais votre code PIN ou votre mot de passe par téléphone, par SMS, par e-mail ou via un formulaire.",
+    "Téléchargez l'application uniquement depuis la boutique officielle, à partir du lien de cette page.",
+    "En cas de perte de votre carte ou de doute sur une opération, contactez immédiatement votre caisse."
+  ]
+}

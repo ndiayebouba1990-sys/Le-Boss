@@ -1,0 +1,81 @@
+# ==========================================================================
+# U-IMCEC — configuration Apache (hébergement mutualisé avec .htaccess)
+# ==========================================================================
+
+Options -Indexes
+ErrorDocument 404 /404.html
+AddDefaultCharset utf-8
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # --- HTTPS obligatoire (à activer dès que le certificat est en place) ---
+  # RewriteCond %{HTTPS} off
+  # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # --- Redirections des anciennes adresses (sites 2016 à 2026) ---
+  RewriteRule ^index\.(html|php)$ / [R=301,L]
+  RewriteRule ^(exchange|presentation|mission|visions|valeurs|historique|dg|siegeuimcec|unionag)\.html$ /u-imcec/ [R=301,L]
+  RewriteRule ^(presentation|uimcec|motdg|sociaux|financiers|performancesociale)\.php$ /u-imcec/ [R=301,L]
+  RewriteRule ^(services|digit|Monetique)\.html$ /services-numeriques/ [R=301,L]
+  RewriteRule ^(monetique|transfert|transfert_argent)\.php$ /services-numeriques/ [R=301,L]
+  RewriteRule ^(new|article)(\.html|/.*)?$ /actualites/ [R=301,L]
+  RewriteRule ^contact\.(html|php)$ /contact/ [R=301,L]
+  RewriteRule ^(epargne|Depot_terme|Depot_vue)\.html$ /solutions/epargne/ [R=301,L]
+  RewriteRule ^(epargne-a-terme|epargne-a-vue|depot_terme|depot_vue)\.php$ /solutions/epargne/ [R=301,L]
+  RewriteRule ^credit[a-z]*\.(html|php)$ /solutions/credit/ [R=301,L]
+  RewriteRule ^(pret[a-z]*|petitcredit|groupecommunautaire)\.php$ /solutions/credit/ [R=301,L]
+  RewriteRule ^(financementcible|financementtouba|financementmboa)\.html$ /solutions/credit/ [R=301,L]
+  RewriteRule ^(cfa|mareyeurssl)\.html$ /solutions/financement-agricole/ [R=301,L]
+  RewriteRule ^assurance\.html$ /solutions/assurances/ [R=301,L]
+  RewriteRule ^(compte|Personne_physique|Personne_morale)\.html$ /solutions/ouvrir-un-compte/ [R=301,L]
+  RewriteRule ^(ouvrir_compte_imcec|personne_physique|personne_morale)\.php$ /solutions/ouvrir-un-compte/ [R=301,L]
+  RewriteRule ^(reseaufemmes|reseaufemmekaolack|reseaufemmenotto|reseaufemmesl|projetjeune|imceclaureate)\.html$ /solutions/femmes-et-jeunes/ [R=301,L]
+  RewriteRule ^(dakar|ImcecDakar)\.html$ /agences/imcec-dakar/ [R=301,L]
+  RewriteRule ^(thies|ImcecThies)\.html$ /agences/imcec-thies/ [R=301,L]
+  RewriteRule ^(mbour|ImcecMbour)\.html$ /agences/imcec-mbour/ [R=301,L]
+  RewriteRule ^casamance\.html$ /agences/imcec-casamance/ [R=301,L]
+  RewriteRule ^imcec_?dakar\.php$ /agences/imcec-dakar/ [R=301,L]
+  RewriteRule ^imcec_?thies\.php$ /agences/imcec-thies/ [R=301,L]
+  RewriteRule ^imcec_?mbour\.php$ /agences/imcec-mbour/ [R=301,L]
+  RewriteRule ^imcec_?casamance\.php$ /agences/imcec-casamance/ [R=301,L]
+  RewriteRule ^Cartographie\.(html|php)$ /agences/ [R=301,L]
+  RewriteRule ^(visiteministre|partenariatministre|tourneetamba|uimceckafountine|randonnee|regatesaintlouis|sensibilisationcancer|planaffairemembre|formation[a-z]*)\.html$ /actualites/ [R=301,L]
+</IfModule>
+
+# --- En-têtes de sécurité ---
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), camera=(), microphone=(), payment=()"
+  # Le site n'utilise que ses propres fichiers : politique de contenu stricte.
+  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'"
+  # À activer une fois HTTPS généralisé :
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # Cache long pour les fichiers statiques (leur adresse change à chaque publication : ?v=…)
+  <FilesMatch "\.(css|js|woff2|webp|avif|jpg|jpeg|png|svg|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(html|xml|txt|webmanifest)$">
+    Header set Cache-Control "public, max-age=600"
+  </FilesMatch>
+</IfModule>
+
+# --- Compression ---
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json application/xml image/svg+xml application/manifest+json text/plain
+</IfModule>
+
+# --- Types de fichiers ---
+<IfModule mod_mime.c>
+  AddType font/woff2 .woff2
+  AddType image/webp .webp
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
+# --- Fichiers à ne jamais servir ---
+<FilesMatch "(^\.|\.(log|ini|bak|sql)$)">
+  Require all denied
+</FilesMatch>

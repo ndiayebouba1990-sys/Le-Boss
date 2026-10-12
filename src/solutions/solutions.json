@@ -1,0 +1,11 @@
+{
+  "layout": "layouts/solution.njk",
+  "permalink": "/solutions/{{ page.fileSlug }}/",
+  "conditions": "Les taux, les montants, les durées, les frais et les garanties éventuelles ne sont pas publiés sur ce site : ils vous sont présentés par votre caisse, avant tout engagement de votre part.",
+  "etapes": [
+    { "titre": "Rendez-vous dans une caisse ou un guichet", "texte": "Repérez le point de service le plus proche grâce à la recherche d'agence, ou appelez la direction générale pour être orienté." },
+    { "titre": "Présentez votre besoin à un conseiller", "texte": "Il prend le temps de comprendre votre situation et vous explique les solutions adaptées, avec leurs conditions." },
+    { "titre": "Constituez votre dossier", "texte": "La liste des pièces à fournir vous est remise par votre caisse." },
+    { "titre": "Recevez la réponse de votre caisse", "texte": "Votre caisse vous informe de la suite donnée à votre demande et vous accompagne dans la mise en place." }
+  ]
+}

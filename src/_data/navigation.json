@@ -1,0 +1,23 @@
+{
+  "principale": [
+    { "libelle": "Solutions", "url": "/solutions/", "panneau": true },
+    { "libelle": "Services numériques", "url": "/services-numeriques/" },
+    { "libelle": "U-IMCEC", "url": "/u-imcec/" },
+    { "libelle": "Agences", "url": "/agences/" },
+    { "libelle": "Actualités", "url": "/actualites/" },
+    { "libelle": "Contact", "url": "/contact/" }
+  ],
+  "pied_institution": [
+    { "libelle": "Qui sommes-nous ?", "url": "/u-imcec/" },
+    { "libelle": "Nos engagements", "url": "/u-imcec/#engagements" },
+    { "libelle": "Trouver une agence", "url": "/agences/" },
+    { "libelle": "Actualités", "url": "/actualites/" },
+    { "libelle": "Nous contacter", "url": "/contact/" }
+  ],
+  "pied_legal": [
+    { "libelle": "Mentions légales", "url": "/mentions-legales/" },
+    { "libelle": "Politique de confidentialité", "url": "/confidentialite/" },
+    { "libelle": "Crédits photographiques", "url": "/credits/" },
+    { "libelle": "Plan du site", "url": "/plan-du-site/" }
+  ]
+}

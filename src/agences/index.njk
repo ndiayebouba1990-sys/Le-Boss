@@ -1,0 +1,38 @@
+---
+layout: layouts/base.njk
+title: "Trouver une agence"
+titre_seo: "Trouver une agence U-IMCEC près de chez vous — Sénégal"
+description: "Recherchez une caisse, une agence ou un guichet U-IMCEC par ville ou par région : adresses, téléphones et itinéraires. Réseau présent dans les 14 régions du Sénégal."
+permalink: /agences/
+scripts: ["agences.js"]
+---
+{%- import "partials/macros.njk" as m with context -%}
+
+{{ m.bandeau("Une caisse près de chez vous", "Quatre caisses de base, 19 agences et 53 guichets dans les 14 régions du Sénégal. Recherchez votre point de service par ville, par quartier ou par région.", "Trouver une agence") }}
+
+<section class="section" aria-labelledby="recherche-titre">
+  <div class="conteneur">
+    <h2 class="sr-only" id="recherche-titre">Rechercher un point de service</h2>
+    {% set locPage = true %}{% set locId = "page" %}
+    {% include "partials/localisateur.njk" %}
+
+    {{ m.noteValidation("Le répertoire publié ici est partiel. Seules la direction générale et les quatre caisses de base sont confirmées par le site officiel ; les autres points proviennent d'un annuaire tiers et sont signalés. U-IMCEC doit fournir la liste complète des 19 agences et 53 guichets (adresse, téléphone, horaires, coordonnées GPS) dans le fichier src/_data/agences.json ou via l'interface d'administration.") }}
+  </div>
+</section>
+
+<section class="section section--sable" aria-labelledby="aide-titre">
+  <div class="conteneur reseau__grille">
+    <div class="revele">
+      <p class="surtitre">Besoin d'aide ?</p>
+      <h2 id="aide-titre">Vous ne trouvez pas votre localité ?</h2>
+      <p class="chapo">La direction générale vous indique le point de service le plus proche et ses horaires d'ouverture.</p>
+    </div>
+    <ul class="coordonnees revele" role="list">
+      <li class="coordonnee"><span class="pastille">{{ m.ico("telephone") }}</span><div><small>Téléphone</small><a href="tel:{{ site.coordonnees.telephone | tel }}">{{ site.coordonnees.telephone }}</a></div></li>
+      <li class="coordonnee"><span class="pastille">{{ m.ico("courriel") }}</span><div><small>E-mail</small><a href="mailto:{{ site.coordonnees.email }}">{{ site.coordonnees.email }}</a></div></li>
+      <li class="coordonnee"><span class="pastille">{{ m.ico("repere") }}</span><div><small>Direction générale</small><strong>{{ site.coordonnees.adresse_ligne1 }}, Dakar</strong></div></li>
+    </ul>
+  </div>
+</section>
+
+{{ m.appelFinal("Une question avant de vous déplacer ?", "Écrivez-nous : un conseiller vous répond et vous oriente vers la bonne caisse.", "sable") }}

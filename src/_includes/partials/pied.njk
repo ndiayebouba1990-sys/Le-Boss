@@ -1,0 +1,59 @@
+{%- import "partials/macros.njk" as m with context -%}
+{# Pied de page : marque, solutions, institution, coordonnées vérifiées, mentions réglementaires. #}
+<footer class="pied">
+  <div class="conteneur">
+    <div class="pied__haut">
+      <div class="pied__marque">
+        <a class="marque" href="/" aria-label="{{ site.nom }} — retour à l'accueil">
+          <img src="/assets/img/logo-uimcec-96.png" srcset="/assets/img/logo-uimcec-96.png 1x, /assets/img/logo-uimcec-192.png 2x" width="60" height="60" alt="" loading="lazy">
+          <span class="marque__nom"><strong>{{ site.nom }}</strong><span>{{ site.signature }}</span></span>
+        </a>
+        <p>{{ site.nom_complet }}. Au service des familles, des femmes et des jeunes entrepreneurs du Sénégal depuis {{ site.reglementaire.creation }}.</p>
+        <ul class="pied__sociaux" role="list">
+          {% for r in site.reseaux %}
+          <li><a href="{{ r.url }}" target="_blank" rel="noopener" aria-label="{{ site.nom }} sur {{ r.nom }} (nouvel onglet)">{{ m.ico(r.icone, "ico--plein") }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <nav aria-labelledby="pied-solutions">
+        <h2 id="pied-solutions">Nos solutions</h2>
+        <ul class="pied__liens" role="list">
+          {% for s in collections.solutions %}<li><a href="{{ s.url }}">{{ s.data.title }}</a></li>
+          {% endfor %}
+          <li><a href="/services-numeriques/">Services numériques</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="pied-institution">
+        <h2 id="pied-institution">U-IMCEC</h2>
+        <ul class="pied__liens" role="list">
+          {% for l in navigation.pied_institution %}<li><a href="{{ l.url }}">{{ l.libelle }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+
+      <div>
+        <h2 id="pied-contact">Direction générale</h2>
+        <ul class="pied__contact" role="list" aria-labelledby="pied-contact">
+          <li>{{ m.ico("repere") }}<address>{{ site.coordonnees.adresse_ligne1 }}<br>{{ site.coordonnees.adresse_ligne2 }}</address></li>
+          <li>{{ m.ico("telephone") }}<a href="tel:{{ site.coordonnees.telephone | tel }}">{{ site.coordonnees.telephone }}</a></li>
+          <li>{{ m.ico("courriel") }}<a href="mailto:{{ site.coordonnees.email }}">{{ site.coordonnees.email }}</a></li>
+          <li>{{ m.ico("itineraire") }}<a href="{{ site.coordonnees.adresse_carte | itineraire }}" target="_blank" rel="noopener">Obtenir l'itinéraire <span class="sr-only">(nouvel onglet)</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="pied__reglementaire">
+      {{ site.nom }} est une institution mutualiste d'épargne et de crédit agréée par le {{ site.reglementaire.autorite }} sous le numéro {{ site.reglementaire.agrement }}, régie par la {{ site.reglementaire.loi }}.
+    </p>
+
+    <div class="pied__bas">
+      <p>© {{ build.annee }} {{ site.nom }}. Tous droits réservés.</p>
+      <ul role="list">
+        {% for l in navigation.pied_legal %}<li><a href="{{ l.url }}">{{ l.libelle }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</footer>

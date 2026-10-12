@@ -1,0 +1,247 @@
+---
+layout: layouts/base.njk
+titre_seo: "U-IMCEC Sénégal — Épargne, crédit et services financiers de proximité"
+description: "U-IMCEC, mutuelle d'épargne et de crédit présente dans les 14 régions du Sénégal : épargne, crédit, financement agricole, services numériques. Trouvez votre agence."
+classe_page: page-accueil
+scripts: ["agences.js"]
+---
+{%- import "partials/macros.njk" as m with context -%}
+
+{# ============ A. Bannière ============ #}
+<section class="hero" data-hero aria-roledescription="carrousel" aria-label="À la une">
+  <div class="hero__fonds" aria-hidden="true">
+    {% for d in accueil.diapositives %}
+    <div class="hero__fond hero__fond--{{ loop.index }}{% if loop.first %} est-active{% endif %}" data-fond>
+      {{ m.photo(d.image, "", "100vw", "", not loop.first) }}
+    </div>
+    {% endfor %}
+  </div>
+  <div class="hero__voile" aria-hidden="true"></div>
+  <div class="hero__soleil" aria-hidden="true"></div>
+
+  <div class="conteneur hero__contenu">
+    <div class="hero__diapos" data-diapos aria-live="off">
+      {% for d in accueil.diapositives %}
+      <div class="hero__diapo{% if loop.first %} est-active{% endif %}" data-diapo role="group" aria-roledescription="diapositive" aria-label="{{ loop.index }} sur {{ loop.length }} : {{ d.onglet }}">
+        <p class="surtitre">{{ d.surtitre }}</p>
+        {% if loop.first %}<h1 class="hero__titre">{{ d.titre }}</h1>{% else %}<h2 class="hero__titre">{{ d.titre }}</h2>{% endif %}
+        <p class="hero__texte">{{ d.texte }}</p>
+        <div class="actions">
+          <a class="btn btn--primaire" href="{{ d.bouton1.url }}">{{ d.bouton1.libelle }} {{ m.ico("fleche", "ico--fleche") }}</a>
+          <a class="btn btn--clair" href="{{ d.bouton2.url }}">{{ d.bouton2.libelle }}</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="conteneur hero__commandes">
+    <ul class="hero__onglets" role="list">
+      {% for d in accueil.diapositives %}
+      <li><button class="hero__onglet" type="button" data-onglet{% if loop.first %} aria-current="true"{% endif %}>
+        <span class="num" aria-hidden="true">0{{ loop.index }}</span>
+        <span><span class="sr-only">Diapositive {{ loop.index }} : </span>{{ d.onglet }}</span>
+      </button></li>
+      {% endfor %}
+    </ul>
+    <button class="hero__pause" type="button" data-pause aria-label="Mettre le défilement en pause">
+      {{ m.ico("pause", "ico--pause") }}{{ m.ico("lecture", "ico--lecture") }}
+    </button>
+  </div>
+  <a class="credit-photo" href="/credits/">Photos d'illustration · crédits</a>
+</section>
+
+{# ============ B. Accès rapides ============ #}
+<section class="besoins" aria-labelledby="besoins-titre">
+  <div class="conteneur">
+    <div class="besoins__carte">
+      <div class="besoins__titre">
+        <h2 id="besoins-titre">Que souhaitez-vous faire ?</h2>
+        <p>Choisissez votre besoin, nous vous guidons.</p>
+      </div>
+      <ul class="besoins__grille" role="list">
+        {% for b in accueil.besoins %}
+        <li><a class="besoin" href="{{ b.url }}">
+          <span class="pastille">{{ m.ico(b.icone) }}</span>
+          <span><strong>{{ b.titre }}</strong><span>{{ b.texte }}</span></span>
+        </a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{# ============ C. Solutions ============ #}
+<section class="section" aria-labelledby="solutions-titre">
+  <div class="conteneur">
+    {{ m.tete("Nos solutions financières", "Une solution pour chaque étape de votre vie et de votre activité.", "Épargner pour demain, financer un projet, sécuriser une campagne agricole : découvrez ce que votre caisse peut faire pour vous. Les conditions vous sont détaillées en agence.", 2, false, "solutions-titre") }}
+    <div class="solutions__grille">
+      {% for s in collections.solutions %}
+      <article class="carte carte-solution{% if loop.index <= 2 %} carte-solution--vedette{% endif %}{% if not s.data.image %} carte-solution--sans-photo{% endif %} revele">
+        {% if s.data.image %}
+        <div class="carte__media">
+          {{ m.photo(s.data.image, s.data.image_alt, "(min-width: 1080px) 620px, (min-width: 700px) 50vw, 100vw") }}
+          <span class="carte-solution__num">{{ m.ico(s.data.icone) }}</span>
+          {{ m.credit(s.data.image) }}
+        </div>
+        {% endif %}
+        <div class="carte__corps">
+          {% if not s.data.image %}<span class="pastille">{{ m.ico(s.data.icone) }}</span>{% endif %}
+          <h3><a class="carte__lien" href="{{ s.url }}">{{ s.data.title }}</a></h3>
+          <p>{{ s.data.resume }}</p>
+          <div class="carte__pied">
+            <span class="lien" aria-hidden="true">En savoir plus {{ m.ico("fleche") }}</span>
+            <a class="lien-texte lien-second" href="/contact/?sujet={{ s.data.sujet_contact }}">Demander des renseignements<span class="sr-only"> sur : {{ s.data.title }}</span></a>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ============ D. Présentation humaine ============ #}
+<section class="section section--sable" aria-labelledby="apropos-titre">
+  <div class="conteneur apropos__grille">
+    <div class="apropos__visuel revele">
+      <div class="dome">
+        {{ m.photo("marche-lompoul", "Jour de marché dans un village de la zone des Niayes, au Sénégal", "(min-width: 960px) 480px, 90vw") }}
+        {{ m.credit("marche-lompoul") }}
+      </div>
+      <p class="apropos__encart"><strong>{{ site.reglementaire.creation }}</strong>Année de création de U-IMCEC, au service du développement des communautés de base.</p>
+    </div>
+    <div class="revele">
+      <p class="surtitre">Qui sommes-nous ?</p>
+      <h2 id="apropos-titre">Une finance qui part des communautés.</h2>
+      <blockquote class="citation">« {{ accueil.mission.citation }} »<cite>{{ accueil.mission.source }}</cite></blockquote>
+      <ul class="piliers" role="list">
+        {% for p in accueil.mission.piliers %}
+        <li class="pilier">
+          <span class="pastille">{{ m.ico(p.icone) }}</span>
+          <div><h3>{{ p.titre }}</h3><p>{{ p.texte }}</p></div>
+        </li>
+        {% endfor %}
+      </ul>
+      <a class="btn btn--sombre" href="/u-imcec/">Découvrir U-IMCEC {{ m.ico("fleche", "ico--fleche") }}</a>
+    </div>
+  </div>
+</section>
+
+{# ============ E. Chiffres clés ============ #}
+<section class="section fond-sombre chiffres" aria-labelledby="chiffres-titre">
+  <div class="conteneur">
+    {{ m.tete("U-IMCEC en chiffres", "Un réseau ancré dans tout le pays.", "Quatre caisses de base, des agences et des guichets implantés essentiellement en milieu rural et périurbain.", 2, false, "chiffres-titre") }}
+    <ul class="chiffres__grille revele" role="list">
+      {% for c in chiffres.liste %}
+      {% if c.confirme %}
+      <li class="chiffre">
+        <span class="chiffre__valeur{% if c.valeur | length > 4 %} chiffre__valeur--texte{% endif %}">{{ c.valeur }}</span>
+        <span class="chiffre__libelle">{{ c.libelle }}</span>
+        <span class="chiffre__detail">{{ c.detail }}</span>
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+    <p class="chiffres__note">{{ chiffres.note }}</p>
+    {% if site.prepublication %}
+    {% for c in chiffres.liste %}{% if not c.confirme %}
+    <p class="note-validation">{{ m.ico("info") }}<span><strong>Indicateur à compléter : {{ c.libelle | lower }}.</strong> {{ c.detail }}. Il s'affichera ici dès qu'il sera renseigné dans <code>src/_data/chiffres.json</code>.</span></p>
+    {% endif %}{% endfor %}
+    {% endif %}
+  </div>
+</section>
+
+{# ============ F. Services numériques ============ #}
+<section class="section section--creme" aria-labelledby="numerique-titre">
+  <div class="conteneur numerique__grille">
+    <div class="revele">
+      <p class="surtitre">Services numériques</p>
+      <h2 id="numerique-titre">Vos services, là où vous êtes.</h2>
+      <p class="chapo">Suivez votre compte depuis votre téléphone, utilisez votre carte et rapprochez votre caisse de votre quotidien.</p>
+      <ul class="numerique__liste" role="list">
+        {% for s in numerique.services %}
+        <li><a class="service-num" href="/services-numeriques/#{{ s.id }}">
+          <span class="pastille">{{ m.ico(s.icone) }}</span>
+          <span><strong>{{ s.titre }}</strong><span>{{ s.resume }}</span></span>
+          {{ m.ico("fleche") }}
+        </a></li>
+        {% endfor %}
+      </ul>
+      <div class="actions">
+        <a class="badge-boutique" href="{{ site.application.google_play }}" target="_blank" rel="noopener">
+          {{ m.ico("telecharger") }}
+          <span><small>Disponible sur</small><strong>Google Play</strong></span>
+          <span class="sr-only">— télécharger {{ site.application.nom }} (nouvel onglet)</span>
+        </a>
+        <a class="btn btn--contour" href="/services-numeriques/">Tous les services numériques</a>
+      </div>
+    </div>
+    <div class="revele">
+      <div class="telephones">
+        <div class="telephone telephone--arriere">{{ m.photo("app-menu", "", "200px") }}</div>
+        <div class="telephone telephone--avant">{{ m.photo("app-accueil", "Écran d'accueil de l'application UIMCEC Mobile : accès aux comptes, aux transferts, au crédit et aux réclamations", "240px") }}</div>
+      </div>
+      <p class="telephones__legende">Captures officielles de l'application {{ site.application.nom }} (compte de démonstration).</p>
+    </div>
+  </div>
+</section>
+
+{# ============ G. Trouver une agence ============ #}
+<section class="section" aria-labelledby="reseau-titre">
+  <div class="conteneur reseau__grille">
+    <div class="revele">
+      <p class="surtitre">Trouver une agence</p>
+      <h2 id="reseau-titre">Une caisse près de chez vous.</h2>
+      <p class="chapo">Recherchez un point de service par ville ou par région, puis lancez l'itinéraire en un geste.</p>
+      <ul class="reseau__regions" role="list" aria-label="Accès direct par région">
+        {% for r in ["Dakar", "Thiès", "Ziguinchor", "Sédhiou", "Kolda"] %}
+        <li><a href="/agences/?region={{ r | urlencode }}">{{ r }}</a></li>
+        {% endfor %}
+        <li><a href="/agences/">Toutes les régions</a></li>
+      </ul>
+      <p class="actions mt-6"><a class="btn btn--sombre" href="/agences/">Voir tout le réseau {{ m.ico("fleche", "ico--fleche") }}</a></p>
+    </div>
+    <div class="revele">
+      {% set locPage = false %}{% set locId = "accueil" %}
+      {% include "partials/localisateur.njk" %}
+    </div>
+  </div>
+</section>
+
+{# ============ H. Actualités ============ #}
+<section class="section section--sable" aria-labelledby="actus-titre">
+  <div class="conteneur">
+    <div class="tete-section revele">
+      <div>
+        <p class="surtitre">Actualités</p>
+        <h2 id="actus-titre">La vie du réseau U-IMCEC.</h2>
+      </div>
+      <p class="tete-section__action"><a class="lien" href="/actualites/">Toutes les actualités {{ m.ico("fleche") }}</a></p>
+    </div>
+    <div class="actus__grille actus__grille--accueil">
+      {% for article in collections.actualites | limite(4) %}
+      {{ m.carteActu(article, 3, loop.first) }}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ============ I. Engagements (en l'absence de témoignages validés) ============ #}
+<section class="section section--sable section--suite" aria-labelledby="engagements-titre">
+  <div class="conteneur">
+    {{ m.tete("Nos engagements", "Ce que vous pouvez attendre de nous.", "", 2, false, "engagements-titre") }}
+    <ul class="engagements__grille" role="list">
+      {% for e in accueil.engagements %}
+      <li class="revele"><div class="engagement">
+        <span class="pastille pastille--brun">{{ m.ico(e.icone) }}</span>
+        <h3>{{ e.titre }}</h3>
+        <p>{{ e.texte }}</p>
+      </div></li>
+      {% endfor %}
+    </ul>
+    {{ m.noteValidation("Cette section remplace les témoignages : aucun témoignage client validé et autorisé n'est disponible à ce jour. Dès que U-IMCEC en fournira, ils pourront être ajoutés ici.") }}
+  </div>
+</section>
+
+{# ============ J. Appel à l'action final ============ #}
+{{ m.appelFinal("Un projet en tête ? Échangeons sur vos besoins.", "Nos conseillers vous accueillent dans les caisses et guichets du réseau pour étudier votre projet avec vous.", "sable") }}

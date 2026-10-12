@@ -1,0 +1,45 @@
+---
+layout: layouts/base.njk
+title: "Plan du site"
+description: "Toutes les pages du site de U-IMCEC Sénégal."
+permalink: /plan-du-site/
+---
+{%- import "partials/macros.njk" as m with context -%}
+
+{{ m.bandeau("Plan du site", "", "Navigation") }}
+
+<section class="section">
+  <div class="conteneur plan plan--liens">
+    <div>
+      <h2>Solutions</h2>
+      <ul role="list">
+        <li><a href="/solutions/">Toutes nos solutions</a></li>
+        {% for s in collections.solutions %}<li><a href="{{ s.url }}">{{ s.data.title }}</a></li>
+        {% endfor %}
+        <li><a href="/services-numeriques/">Services numériques</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>U-IMCEC</h2>
+      <ul role="list">
+        <li><a href="/">Accueil</a></li>
+        <li><a href="/u-imcec/">Qui sommes-nous ?</a></li>
+        <li><a href="/agences/">Trouver une agence</a></li>
+        {% for c in caisses %}<li><a href="/agences/{{ c.id }}/">{{ c.nom }}</a></li>
+        {% endfor %}
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/mentions-legales/">Mentions légales</a></li>
+        <li><a href="/confidentialite/">Politique de confidentialité</a></li>
+        <li><a href="/credits/">Crédits photographiques</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Actualités</h2>
+      <ul role="list">
+        <li><a href="/actualites/">Toutes les actualités</a></li>
+        {% for a in collections.actualites %}<li><a href="{{ a.url }}">{{ a.data.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>

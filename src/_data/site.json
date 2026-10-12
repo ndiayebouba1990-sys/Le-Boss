@@ -1,0 +1,88 @@
+{
+  "nom": "U-IMCEC",
+  "nom_complet": "Union des Institutions Mutualistes Communautaires d'Épargne et de Crédit",
+  "signature": "Mutuelle d'épargne et de crédit",
+  "url": "https://www.uimcec.sn",
+  "langue": "fr",
+  "description": "U-IMCEC, institution mutualiste d'épargne et de crédit au Sénégal : épargne, crédit, financement agricole, services numériques et accompagnement des femmes et des jeunes entrepreneurs.",
+  "prepublication": true,
+  "prepublication_message": "Les contenus signalés « à confirmer » doivent être validés par U-IMCEC avant la mise en ligne.",
+  "coordonnees": {
+    "adresse_ligne1": "Hann Maristes Extension, lot n° P52",
+    "adresse_ligne2": "BP 37167 Grand-Yoff — Dakar, Sénégal",
+    "adresse_carte": "U-IMCEC, Hann Maristes Extension, lot P52, Dakar, Sénégal",
+    "telephone": "+221 33 832 08 55",
+    "email": "uimcec@uimcec.sn",
+    "horaires": ""
+  },
+  "reglementaire": {
+    "agrement": "DK 1.06.0009 U",
+    "autorite": "Ministre de l'Économie et des Finances du Sénégal",
+    "loi": "loi n° 2008-47 du 3 septembre 2008 portant réglementation des systèmes financiers décentralisés",
+    "creation": 2001
+  },
+  "reseaux": [
+    {
+      "nom": "LinkedIn",
+      "icone": "linkedin",
+      "url": "https://sn.linkedin.com/company/u-imcec-senegal"
+    },
+    {
+      "nom": "Facebook",
+      "icone": "facebook",
+      "url": "https://www.facebook.com/people/U-imcec-S%C3%A9n%C3%A9gal/100057427248868/"
+    },
+    {
+      "nom": "X (Twitter)",
+      "icone": "x",
+      "url": "https://x.com/uimcec"
+    }
+  ],
+  "application": {
+    "nom": "UIMCEC Mobile",
+    "google_play": "https://play.google.com/store/apps/details?id=com.cagecfi.pmobile_uimcec_client",
+    "mise_a_jour": "2026-08-27"
+  },
+  "formulaire": {
+    "point_de_traitement": "/api/contact.php",
+    "sujets": [
+      {
+        "cle": "epargne",
+        "libelle": "Épargne"
+      },
+      {
+        "cle": "credit",
+        "libelle": "Crédit ou financement d'un projet"
+      },
+      {
+        "cle": "agricole",
+        "libelle": "Financement agricole"
+      },
+      {
+        "cle": "numerique",
+        "libelle": "Services numériques (carte, application…)"
+      },
+      {
+        "cle": "compte",
+        "libelle": "Ouvrir un compte / devenir membre"
+      },
+      {
+        "cle": "agence",
+        "libelle": "Trouver une agence ou un guichet"
+      },
+      {
+        "cle": "reclamation",
+        "libelle": "Réclamation"
+      },
+      {
+        "cle": "autre",
+        "libelle": "Autre demande"
+      }
+    ]
+  },
+  "mentions": {
+    "directeur_publication": "",
+    "hebergeur": "",
+    "declaration_cdp": ""
+  }
+}

@@ -1,0 +1,126 @@
+---
+layout: layouts/base.njk
+---
+{%- import "partials/macros.njk" as m with context -%}
+{# Page d'une solution — parcours en six étapes :
+   comprendre · pour qui · ce qui est proposé · conditions · démarches · prochaine étape #}
+
+<section class="bandeau-page fond-sombre{% if image %} bandeau-page--photo{% endif %}">
+  {% if image %}<div class="bandeau-page__fond">{{ m.photo(image, "", "100vw", "", false) }}</div>{% endif %}
+  <div class="conteneur bandeau-page__int">
+    <nav class="ariane" aria-label="Fil d'Ariane">
+      <ol>
+        <li><a href="/">Accueil</a></li>
+        <li><a href="/solutions/">Solutions</a></li>
+        <li aria-current="page">{{ title }}</li>
+      </ol>
+    </nav>
+    <p class="surtitre">Nos solutions</p>
+    <h1>{{ titre_long or title }}</h1>
+    <p class="bandeau-page__chapo">{{ resume }}</p>
+    <div class="actions">
+      <a class="btn btn--primaire" href="/contact/?sujet={{ sujet_contact }}">Demander des renseignements {{ m.ico("fleche", "ico--fleche") }}</a>
+      <a class="btn btn--clair" href="/agences/">{{ m.ico("repere") }} Trouver une agence</a>
+    </div>
+  </div>
+  {% if image %}{{ m.credit(image) }}{% endif %}
+</section>
+
+<div class="section">
+  <div class="conteneur solution__grille">
+    <div class="solution__corps">
+
+      <section aria-labelledby="s-comprendre">
+        <h2 id="s-comprendre"><span class="num" aria-hidden="true">01</span>Comprendre</h2>
+        <div class="prose">{{ content | safe }}</div>
+      </section>
+
+      {% if pour_qui %}
+      <section aria-labelledby="s-pour-qui">
+        <h2 id="s-pour-qui"><span class="num" aria-hidden="true">02</span>À qui s'adresse cette solution ?</h2>
+        <ul class="grille-publics" role="list">
+          {% for p in pour_qui %}<li>{{ m.ico("coche") }}<span>{{ p }}</span></li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+      <section aria-labelledby="s-offres">
+        <h2 id="s-offres"><span class="num" aria-hidden="true">03</span>Ce que propose U-IMCEC</h2>
+        {% if offres %}
+        <ul class="offres" role="list">
+          {% for o in offres %}
+          <li class="offre">
+            <h3>{{ o.titre }}</h3>
+            <p>{{ o.texte }}</p>
+            {% if o.source %}<small class="offre__source">Source : {{ o.source }}</small>{% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>Le détail de l'offre vous est présenté par votre caisse.</p>
+        {% endif %}
+        {% if a_completer %}{{ m.noteValidation(a_completer) }}{% endif %}
+      </section>
+
+      <section aria-labelledby="s-conditions">
+        <h2 id="s-conditions"><span class="num" aria-hidden="true">04</span>Conditions</h2>
+        <div class="encart-conditions">
+          {{ m.ico("info") }}
+          <p>{{ conditions }}</p>
+        </div>
+      </section>
+
+      {% if etapes %}
+      <section aria-labelledby="s-demarches">
+        <h2 id="s-demarches"><span class="num" aria-hidden="true">05</span>Les démarches</h2>
+        <ol class="etapes" role="list">
+          {% for e in etapes %}
+          <li class="etape"><div><h3>{{ e.titre }}</h3><p>{{ e.texte }}</p></div></li>
+          {% endfor %}
+        </ol>
+        {{ m.noteValidation("Les démarches ci-dessus décrivent un parcours type. U-IMCEC doit confirmer les étapes exactes, les pièces à fournir et les délais.") }}
+      </section>
+      {% endif %}
+
+      {% if prochaine_etape %}
+      <section aria-labelledby="s-suite">
+        <h2 id="s-suite"><span class="num" aria-hidden="true">06</span>Et ensuite ?</h2>
+        <p class="chapo">{{ prochaine_etape }}</p>
+      </section>
+      {% endif %}
+    </div>
+
+    <aside class="solution__aside" aria-label="Contacter U-IMCEC">
+      <div class="carte-contact">
+        <h2>Parlons de votre projet</h2>
+        <p>Un conseiller répond à vos questions et vous oriente vers la caisse la plus proche.</p>
+        <div class="actions">
+          <a class="btn btn--primaire btn--bloc" href="/contact/?sujet={{ sujet_contact }}">Écrire à U-IMCEC {{ m.ico("fleche", "ico--fleche") }}</a>
+          <a class="btn btn--clair btn--bloc" href="/agences/">{{ m.ico("repere") }} Trouver une agence</a>
+        </div>
+        <a class="carte-contact__ligne" href="tel:{{ site.coordonnees.telephone | tel }}">{{ m.ico("telephone") }} {{ site.coordonnees.telephone }}</a>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<section class="section section--sable" aria-labelledby="autres-titre">
+  <div class="conteneur">
+    {{ m.tete("À découvrir aussi", "Nos autres solutions", "", 2, false, "autres-titre") }}
+    <ul class="autres-solutions" role="list">
+      {% for s in collections.solutions %}{% if s.url != page.url %}
+      <li><a class="autre-solution" href="{{ s.url }}">
+        <span class="pastille">{{ m.ico(s.data.icone) }}</span>
+        <span><strong>{{ s.data.title }}</strong><span>{{ s.data.accroche }}</span></span>
+      </a></li>
+      {% endif %}{% endfor %}
+      <li><a class="autre-solution" href="/services-numeriques/">
+        <span class="pastille">{{ m.ico("mobile") }}</span>
+        <span><strong>Services numériques</strong><span>Carte, application et services mobiles.</span></span>
+      </a></li>
+    </ul>
+  </div>
+</section>
+
+{{ m.appelFinal("Prêt à passer à l'étape suivante ?", "Rendez-vous dans la caisse la plus proche ou écrivez-nous : un conseiller étudie votre besoin avec vous.", "sable") }}

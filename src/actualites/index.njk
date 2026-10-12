@@ -1,0 +1,27 @@
+---
+layout: layouts/base.njk
+title: "Actualités"
+titre_seo: "Actualités de U-IMCEC Sénégal"
+description: "Partenariats, vie du réseau, programmes pour les femmes et les jeunes entrepreneurs : suivez l'actualité de U-IMCEC."
+permalink: /actualites/
+eleventyExcludeFromCollections: true
+---
+{%- import "partials/macros.njk" as m with context -%}
+
+{{ m.bandeau("La vie du réseau U-IMCEC", "Partenariats, programmes, nouveaux points de service : les dernières nouvelles de l'institution et de ses caisses.", "Actualités") }}
+
+<section class="section" aria-labelledby="liste-actus">
+  <div class="conteneur">
+    <h2 class="sr-only" id="liste-actus">Tous les articles</h2>
+    <div class="actus__grille actus__grille--liste">
+      {% for article in collections.actualites %}
+      {{ m.carteActu(article, 3) }}
+      {% endfor %}
+    </div>
+    <p class="mt-7 chapo">Pour suivre U-IMCEC au quotidien, retrouvez l'institution sur
+      {% for r in site.reseaux %}<a class="lien-texte" href="{{ r.url }}" target="_blank" rel="noopener">{{ r.nom }}<span class="sr-only"> (nouvel onglet)</span></a>{% if loop.revindex == 2 %} et {% elif not loop.last %}, {% endif %}{% endfor %}.
+    </p>
+  </div>
+</section>
+
+{{ m.appelFinal() }}

@@ -1,0 +1,102 @@
+---
+layout: layouts/base.njk
+title: "Contact"
+titre_seo: "Contacter U-IMCEC Sénégal — téléphone, e-mail, formulaire"
+description: "Contactez U-IMCEC : direction générale à Hann Maristes (Dakar), téléphone +221 33 832 08 55, e-mail et formulaire de demande de renseignements."
+permalink: /contact/
+scripts: ["contact.js"]
+---
+{%- import "partials/macros.njk" as m with context -%}
+
+{{ m.bandeau("Parlons de votre projet", "Une question sur l'épargne, un crédit ou nos services numériques ? Écrivez-nous ou appelez-nous : un conseiller vous répond et vous oriente.", "Contact") }}
+
+<section class="section" aria-labelledby="formulaire-titre">
+  <div class="conteneur contact__grille">
+
+    <div class="revele">
+      <p class="surtitre">Nos coordonnées</p>
+      <h2>Direction générale</h2>
+      <ul class="coordonnees mt-5" role="list">
+        <li class="coordonnee"><span class="pastille">{{ m.ico("telephone") }}</span><div><small>Téléphone</small><a href="tel:{{ site.coordonnees.telephone | tel }}">{{ site.coordonnees.telephone }}</a></div></li>
+        <li class="coordonnee"><span class="pastille">{{ m.ico("courriel") }}</span><div><small>E-mail</small><a href="mailto:{{ site.coordonnees.email }}">{{ site.coordonnees.email }}</a></div></li>
+        <li class="coordonnee"><span class="pastille">{{ m.ico("repere") }}</span><div><small>Adresse</small><strong>{{ site.coordonnees.adresse_ligne1 }}</strong><br>{{ site.coordonnees.adresse_ligne2 }}</div></li>
+        <li class="coordonnee"><span class="pastille">{{ m.ico("horloge") }}</span><div><small>Horaires</small>{% if site.coordonnees.horaires %}<strong>{{ site.coordonnees.horaires }}</strong>{% else %}Renseignez-vous par téléphone avant de vous déplacer. {{ m.aConfirmer("Horaires à compléter") }}{% endif %}</div></li>
+      </ul>
+      <p class="actions mt-5">
+        <a class="btn btn--sombre btn--petit" href="{{ site.coordonnees.adresse_carte | itineraire }}" target="_blank" rel="noopener">{{ m.ico("itineraire") }} Itinéraire<span class="sr-only"> vers la direction générale (nouvel onglet)</span></a>
+        <a class="btn btn--contour btn--petit" href="/agences/">{{ m.ico("repere") }} Trouver une agence</a>
+      </p>
+      <p class="message message--info mt-6">{{ m.ico("bouclier") }}<span><strong>Pour votre sécurité :</strong> n'indiquez jamais de mot de passe, de code PIN ni de numéro de carte dans ce formulaire. U-IMCEC ne vous les demandera jamais.</span></p>
+    </div>
+
+    <form class="formulaire revele" action="{{ site.formulaire.point_de_traitement }}" method="post" novalidate data-formulaire-contact data-courriel="{{ site.coordonnees.email }}" data-telephone="{{ site.coordonnees.telephone }}">
+      <div>
+        <h2 id="formulaire-titre">Envoyer une demande</h2>
+        <p class="formulaire__note mt-2">Les champs marqués d'un astérisque (*) sont obligatoires.</p>
+      </div>
+
+      <div class="formulaire__duo">
+        <div class="champ">
+          <label for="c-nom">Nom complet *</label>
+          <input id="c-nom" name="nom" type="text" autocomplete="name" required maxlength="80" aria-describedby="c-nom-erreur">
+          <p class="champ__erreur" id="c-nom-erreur" hidden></p>
+        </div>
+        <div class="champ">
+          <label for="c-telephone">Téléphone *</label>
+          <input id="c-telephone" name="telephone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="20" placeholder="77 123 45 67" aria-describedby="c-telephone-erreur">
+          <p class="champ__erreur" id="c-telephone-erreur" hidden></p>
+        </div>
+      </div>
+
+      <div class="formulaire__duo">
+        <div class="champ">
+          <label for="c-email">E-mail <span class="facultatif">(facultatif)</span></label>
+          <input id="c-email" name="email" type="email" autocomplete="email" maxlength="120" aria-describedby="c-email-erreur">
+          <p class="champ__erreur" id="c-email-erreur" hidden></p>
+        </div>
+        <div class="champ">
+          <label for="c-localite">Votre localité <span class="facultatif">(facultatif)</span></label>
+          <input id="c-localite" name="localite" type="text" autocomplete="address-level2" maxlength="80" placeholder="Ex. Mbour">
+        </div>
+      </div>
+
+      <div class="champ">
+        <label for="c-sujet">Objet de votre demande *</label>
+        <select id="c-sujet" name="sujet" required aria-describedby="c-sujet-erreur">
+          <option value="">Choisissez un objet</option>
+          {% for s in site.formulaire.sujets %}<option value="{{ s.cle }}">{{ s.libelle }}</option>
+          {% endfor %}
+        </select>
+        <p class="champ__erreur" id="c-sujet-erreur" hidden></p>
+      </div>
+
+      <div class="champ">
+        <label for="c-message">Votre message *</label>
+        <textarea id="c-message" name="message" required minlength="10" maxlength="2000" aria-describedby="c-message-aide c-message-erreur"></textarea>
+        <p class="champ__aide" id="c-message-aide">Décrivez votre besoin en quelques lignes, sans donnée confidentielle.</p>
+        <p class="champ__erreur" id="c-message-erreur" hidden></p>
+      </div>
+
+      {# Champ piège anti-robots : invisible, à laisser vide. #}
+      <div class="champ champ--piege" aria-hidden="true">
+        <label for="c-site">Ne pas remplir ce champ</label>
+        <input id="c-site" name="site_web" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="case-bloc">
+        <label class="case" for="c-consentement">
+          <input id="c-consentement" name="consentement" type="checkbox" value="oui" required aria-describedby="c-consentement-erreur">
+          <span>J'accepte que U-IMCEC utilise ces informations pour répondre à ma demande, conformément à sa <a class="lien-texte" href="/confidentialite/">politique de confidentialité</a>. *</span>
+        </label>
+        <p class="champ__erreur" id="c-consentement-erreur" hidden></p>
+      </div>
+
+      <div class="formulaire__pied">
+        <button class="btn btn--primaire" type="submit">Envoyer ma demande {{ m.ico("envoyer") }}</button>
+        <div data-retour tabindex="-1" role="status" aria-live="polite" hidden></div>
+        <noscript><p class="message message--info">Si l'envoi ne fonctionne pas, écrivez-nous à {{ site.coordonnees.email }} ou appelez le {{ site.coordonnees.telephone }}.</p></noscript>
+      </div>
+      {{ m.noteValidation("Le formulaire envoie les demandes au script api/contact.php. Avant la mise en ligne, renseigner l'adresse de réception dans api/config.php et tester l'envoi sur l'hébergement (voir la documentation).") }}
+    </form>
+  </div>
+</section>

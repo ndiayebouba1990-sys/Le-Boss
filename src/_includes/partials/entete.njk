@@ -1,0 +1,100 @@
+{%- import "partials/macros.njk" as m with context -%}
+{# En-tête : barre utilitaire, navigation bureau avec panneau « Solutions », tiroir mobile. #}
+<div class="entete-barre">
+  <div class="conteneur entete-barre__int">
+    <div class="entete-barre__groupe">
+      <a href="tel:{{ site.coordonnees.telephone | tel }}">{{ m.ico("telephone") }}<span>{{ site.coordonnees.telephone }}</span></a>
+      <a class="masque-mobile" href="mailto:{{ site.coordonnees.email }}">{{ m.ico("courriel") }}<span>{{ site.coordonnees.email }}</span></a>
+    </div>
+    <div class="entete-barre__groupe">
+      <a href="/services-numeriques/">{{ m.ico("mobile") }}<span>Services numériques</span></a>
+      <a class="masque-mobile" href="/agences/">{{ m.ico("repere") }}<span>Trouver une agence</span></a>
+      <ul class="entete-barre__sociaux masque-mobile" role="list">
+        {% for r in site.reseaux %}
+        <li><a href="{{ r.url }}" target="_blank" rel="noopener" aria-label="{{ site.nom }} sur {{ r.nom }} (nouvel onglet)">{{ m.ico(r.icone, "ico--plein") }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<header class="entete" data-entete>
+  <div class="conteneur entete__int">
+    <a class="marque" href="/" aria-label="{{ site.nom }} — retour à l'accueil">
+      <img src="/assets/img/logo-uimcec-96.png" srcset="/assets/img/logo-uimcec-96.png 1x, /assets/img/logo-uimcec-192.png 2x" width="60" height="60" alt="">
+      <span class="marque__nom"><strong>{{ site.nom }}</strong><span>{{ site.signature }}</span></span>
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <ul class="nav__liste" role="list">
+        {% for lien in navigation.principale %}
+        {% set actif = page.url.startsWith(lien.url) %}
+        {% if lien.panneau %}
+        <li class="nav__item--panneau">
+          <button class="nav__lien{% if actif %} est-actif{% endif %}" type="button" aria-expanded="false" aria-controls="panneau-solutions" data-panneau>
+            {{ lien.libelle }} {{ m.ico("chevron", "ico--chevron") }}
+          </button>
+          <div class="panneau" id="panneau-solutions">
+            <div class="conteneur">
+              <div class="panneau__int">
+                <ul class="panneau__liens" role="list">
+                  {% for s in collections.solutions %}
+                  <li><a class="panneau__lien" href="{{ s.url }}">
+                    <span class="pastille">{{ m.ico(s.data.icone) }}</span>
+                    <span><strong>{{ s.data.title }}</strong><span>{{ s.data.accroche }}</span></span>
+                  </a></li>
+                  {% endfor %}
+                </ul>
+                <div class="panneau__aide">
+                  <strong>Vous hésitez entre plusieurs solutions ?</strong>
+                  <p>Un conseiller étudie votre situation avec vous et vous oriente vers la caisse la plus proche.</p>
+                  <a class="btn btn--primaire btn--petit" href="/solutions/">Toutes nos solutions {{ m.ico("fleche", "ico--fleche") }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        {% else %}
+        <li><a class="nav__lien" href="{{ lien.url }}"{% if actif %} aria-current="page"{% endif %}>{{ lien.libelle }}</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <div class="entete__actions">
+      <a class="btn btn--primaire btn--petit btn--entete" href="/solutions/ouvrir-un-compte/">Devenir membre</a>
+      <button class="bascule-menu" type="button" aria-expanded="false" aria-controls="tiroir" aria-label="Ouvrir le menu" data-bascule-menu>
+        {{ m.ico("menu", "ico--menu") }}{{ m.ico("fermer", "ico--fermer") }}
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="tiroir" id="tiroir" data-tiroir aria-label="Menu" role="dialog" aria-modal="true" hidden>
+  <ul class="tiroir__liste" role="list">
+    {% for lien in navigation.principale %}
+    {% set actif = page.url.startsWith(lien.url) %}
+    {% if lien.panneau %}
+    <li>
+      <button class="tiroir__lien" type="button" aria-expanded="false" aria-controls="tiroir-solutions" data-accordeon>{{ lien.libelle }} {{ m.ico("chevron") }}</button>
+      <ul class="tiroir__sous" id="tiroir-solutions" role="list" hidden>
+        <li><a href="/solutions/">{{ m.ico("fleche") }} Toutes nos solutions</a></li>
+        {% for s in collections.solutions %}
+        <li><a href="{{ s.url }}">{{ m.ico(s.data.icone) }} {{ s.data.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% else %}
+    <li><a class="tiroir__lien" href="{{ lien.url }}"{% if actif %} aria-current="page"{% endif %}>{{ lien.libelle }}</a></li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+  <div class="tiroir__bas">
+    <a class="btn btn--primaire btn--bloc" href="/solutions/ouvrir-un-compte/">Devenir membre {{ m.ico("fleche", "ico--fleche") }}</a>
+    <a class="btn btn--contour btn--bloc" href="/agences/">{{ m.ico("repere") }} Trouver une agence</a>
+    <p class="tiroir__contact">
+      <a href="tel:{{ site.coordonnees.telephone | tel }}">{{ m.ico("telephone") }} {{ site.coordonnees.telephone }}</a>
+      <a href="mailto:{{ site.coordonnees.email }}">{{ m.ico("courriel") }} {{ site.coordonnees.email }}</a>
+    </p>
+  </div>
+</div>

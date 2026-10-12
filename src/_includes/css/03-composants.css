@@ -1,0 +1,281 @@
+/* ==========================================================================
+   Composants réutilisables : boutons, liens, cartes, étiquettes, formulaires
+   ========================================================================== */
+
+/* — Boutons — */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 3.1rem;
+  padding: 0.8rem 1.45rem;
+  border: 1.5px solid transparent;
+  border-radius: var(--r-pilule);
+  font-family: var(--police-texte);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color var(--duree) var(--doux), color var(--duree) var(--doux), border-color var(--duree) var(--doux), transform var(--duree) var(--doux), box-shadow var(--duree) var(--doux);
+}
+.btn .ico { width: 1.15em; height: 1.15em; transition: transform var(--duree) var(--doux); }
+.btn:hover .ico--fleche { transform: translateX(4px); }
+.btn:active { transform: translateY(1px); }
+
+/* Action principale : orange de marque, texte brun foncé (contraste 6,9:1) */
+.btn--primaire { background: var(--orange); color: var(--encre); box-shadow: 0 8px 22px rgba(255, 136, 14, 0.28); }
+.btn--primaire:hover { background: #ff9a33; box-shadow: 0 10px 28px rgba(255, 136, 14, 0.38); }
+
+.btn--sombre { background: var(--brun); color: var(--blanc); }
+.btn--sombre:hover { background: var(--brun-profond); }
+
+.btn--contour { border-color: rgba(91, 67, 57, 0.35); color: var(--brun); background: transparent; }
+.btn--contour:hover { background: var(--brun); border-color: var(--brun); color: var(--blanc); }
+
+.btn--clair { border-color: rgba(255, 255, 255, 0.55); color: var(--blanc); background: rgba(255, 255, 255, 0.06); }
+.btn--clair:hover { background: var(--blanc); border-color: var(--blanc); color: var(--brun-profond); }
+
+.btn--petit { min-height: 2.6rem; padding: 0.55rem 1.1rem; font-size: 0.92rem; }
+.btn--bloc { width: 100%; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+
+/* — Lien fléché — */
+.lien {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: var(--brun);
+  border-bottom: 2px solid var(--orange);
+  padding-bottom: 0.15rem;
+  transition: color var(--duree), border-color var(--duree), gap var(--duree) var(--doux);
+}
+.lien .ico { width: 1.05em; height: 1.05em; }
+.lien:hover { color: var(--orange-texte); gap: 0.8rem; }
+.fond-sombre .lien { color: var(--blanc); }
+.fond-sombre .lien:hover { color: #ffc98c; }
+
+/* Liens dans les textes courants */
+.prose a, .lien-texte {
+  color: var(--orange-texte);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+.prose a:hover, .lien-texte:hover { color: var(--brun); }
+
+/* — Étiquettes — */
+.etiquette {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--r-pilule);
+  background: var(--orange-pale);
+  color: #7a3a06;
+  font-size: var(--t-mini);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+.etiquette--brun { background: var(--brun); color: var(--blanc); }
+.etiquette--contour { background: transparent; border: 1px solid var(--ligne); color: var(--gris); }
+
+/* Marqueur « à confirmer » — visible uniquement en mode prépublication */
+.a-confirmer {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.55rem;
+  border: 1px dashed #b8860b;
+  border-radius: 6px;
+  background: #fff8dc;
+  color: #6b4e00;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+}
+.note-validation {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  margin-block: 1.5rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px dashed #b8860b;
+  border-radius: var(--r-s);
+  background: #fff8dc;
+  color: #5a4200;
+  font-size: var(--t-petit);
+}
+.note-validation .ico { margin-top: 0.15rem; }
+
+/* — Cartes — */
+.carte {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--blanc);
+  border: 1px solid var(--ligne);
+  border-radius: var(--r-m);
+  overflow: hidden;
+  transition: transform 0.35s var(--doux), box-shadow 0.35s var(--doux), border-color 0.35s;
+}
+.carte:hover { transform: translateY(-4px); box-shadow: var(--ombre-2); border-color: #e2cdb4; }
+.carte__media { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--sable-200); }
+.carte__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--doux); }
+.carte:hover .carte__media img { transform: scale(1.045); }
+.carte__corps { display: flex; flex-direction: column; flex: 1; gap: 0.7rem; padding: 1.5rem; }
+.carte__corps p { color: var(--gris); font-size: 0.98rem; }
+.carte__pied { margin-top: auto; padding-top: 0.6rem; display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem; align-items: center; }
+/* Toute la carte est cliquable via le lien principal */
+.carte__lien::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.carte__pied .lien-second { position: relative; z-index: 2; }
+
+.pastille {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  flex: none;
+  border-radius: 50%;
+  background: var(--orange-pale);
+  color: var(--brun);
+}
+.pastille .ico { width: 1.5rem; height: 1.5rem; }
+.pastille--brun { background: var(--brun); color: #ffd9b0; }
+
+/* Les images « de remplissage » occupent toute la hauteur de leur cadre */
+.carte__media picture, .dome picture, .hero__fond picture, .bandeau-page__fond picture, .article__image picture { display: block; width: 100%; height: 100%; }
+
+/* — Crédit photo discret — */
+.credit-photo {
+  position: absolute;
+  right: 0.6rem;
+  bottom: 0.5rem;
+  z-index: 2;
+  padding: 0.3rem 0.55rem;
+  border-radius: 4px;
+  background: rgba(42, 30, 25, 0.55);
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.66rem;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+.credit-photo a { text-decoration: underline; }
+
+/* — Fil d'Ariane — */
+.ariane { font-size: var(--t-petit); }
+.ariane ol { display: flex; flex-wrap: wrap; gap: 0.25rem 0.5rem; list-style: none; }
+.ariane li { display: inline-flex; align-items: center; gap: 0.5rem; }
+.ariane li + li::before { content: "/"; opacity: 0.5; }
+.ariane a { text-decoration: underline; text-underline-offset: 3px; }
+.ariane a:hover { color: #ffc98c; }
+
+/* — Formulaires — */
+.champ { display: grid; gap: 0.4rem; }
+.champ label, .champ legend { font-size: 0.92rem; font-weight: 700; color: var(--encre); }
+.champ .facultatif { font-weight: 500; color: var(--gris); }
+.champ input, .champ select, .champ textarea {
+  width: 100%;
+  min-height: 3.1rem;
+  padding: 0.75rem 0.95rem;
+  border: 1.5px solid #dccbb8;
+  border-radius: var(--r-s);
+  background: var(--blanc);
+  color: var(--encre);
+  transition: border-color var(--duree), box-shadow var(--duree);
+}
+.champ textarea { min-height: 9rem; resize: vertical; line-height: 1.55; }
+.champ select {
+  appearance: none;
+  padding-right: 2.6rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235b4339' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  background-size: 1.15rem;
+}
+.champ input::placeholder, .champ textarea::placeholder { color: #9a8b82; }
+.champ input:hover, .champ select:hover, .champ textarea:hover { border-color: #c9b29a; }
+.champ input:focus, .champ select:focus, .champ textarea:focus {
+  outline: none;
+  border-color: var(--orange-fonce);
+  box-shadow: 0 0 0 4px rgba(255, 136, 14, 0.2);
+}
+.champ--erreur input, .champ--erreur select, .champ--erreur textarea { border-color: var(--erreur); }
+.champ__aide { font-size: 0.84rem; color: var(--gris); }
+.champ__erreur { font-size: 0.86rem; font-weight: 600; color: var(--erreur); }
+.champ--piege { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.case { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.93rem; color: var(--texte); }
+.case input { width: 1.3rem; height: 1.3rem; min-height: 0; margin-top: 0.15rem; flex: none; accent-color: var(--brun); }
+
+.message {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  padding: 1rem 1.15rem;
+  border-radius: var(--r-s);
+  font-size: 0.97rem;
+}
+.message .ico { margin-top: 0.1rem; }
+.message--succes { background: var(--succes-pale); color: #1d5234; border: 1px solid #b9dcc6; }
+.message--erreur { background: var(--erreur-pale); color: #7d1a14; border: 1px solid #f0c4bf; }
+.message--info { background: var(--sable-100); color: var(--texte); border: 1px solid var(--ligne); }
+
+/* — Liste à coches — */
+.coches { display: grid; gap: 0.85rem; list-style: none; }
+.coches li { display: flex; gap: 0.8rem; align-items: flex-start; }
+.coches .ico {
+  width: 1.5rem; height: 1.5rem;
+  padding: 0.28rem;
+  margin-top: 0.1rem;
+  border-radius: 50%;
+  background: var(--orange-pale);
+  color: var(--brun);
+  stroke-width: 2.6;
+}
+.fond-sombre .coches .ico { background: rgba(255, 255, 255, 0.12); color: #ffc98c; }
+
+/* — Retour en haut — */
+.retour-haut {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 0;
+  border-radius: 50%;
+  background: var(--brun);
+  color: var(--blanc);
+  box-shadow: var(--ombre-2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.25s, transform 0.25s, visibility 0.25s, background-color 0.25s;
+}
+.retour-haut.est-visible { opacity: 1; visibility: visible; transform: none; }
+.retour-haut:hover { background: var(--orange); color: var(--encre); }
+
+/* — Utilitaires — */
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.25rem; }
+.mt-5 { margin-top: 1.75rem; }
+.mt-6 { margin-top: 2rem; }
+.mt-7 { margin-top: 3rem; }
+.section--suite { padding-top: 0; }
+.chapo--centre { margin-inline: auto; }
+.mission-bloc { max-width: 54rem; }
+.autres-solutions.autres-solutions--colonne { grid-template-columns: 1fr; }
+.plan--liens a { color: var(--orange-texte); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.plan--liens a:hover { color: var(--brun); }
+.actions.mt-6 { margin-top: 2rem; }

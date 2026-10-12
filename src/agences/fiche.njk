@@ -1,0 +1,79 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: caisses
+  size: 1
+  alias: caisse
+permalink: "/agences/{{ caisse.id }}/"
+eleventyComputed:
+  title: "{{ caisse.nom }}"
+  titre_seo: "{{ caisse.nom }} — caisse U-IMCEC {{ caisse.ou }}"
+  description: "{{ caisse.nom }}, caisse de base agréée du réseau U-IMCEC ({{ caisse.regions | join(', ') }}) : coordonnées, services et itinéraire."
+---
+{%- import "partials/macros.njk" as m with context -%}
+{%- set requete = "U-IMCEC " + caisse.nom + " " + (caisse.adresse or caisse.localite) + ", Sénégal" -%}
+
+{{ m.bandeau(caisse.nom, caisse.presentation, agences.types[caisse.type] + " · " + (caisse.regions | join(", ")), [{ libelle: "Agences", url: "/agences/" }]) }}
+
+<section class="section" aria-labelledby="infos-titre">
+  <div class="conteneur fiche-grille">
+    <div class="revele">
+      <p class="surtitre">Informations pratiques</p>
+      <h2 id="infos-titre">Contacter {{ caisse.nom }}</h2>
+      <dl class="fiche-infos mt-5">
+        <div>{{ m.ico("repere") }}<dt>Adresse</dt><dd>{% if caisse.adresse %}{{ caisse.adresse }}{% else %}Communiquée par la direction générale {{ m.aConfirmer("À compléter") }}{% endif %}</dd></div>
+        <div>{{ m.ico("telephone") }}<dt>Téléphone</dt><dd>{% if caisse.telephone %}<a href="tel:{{ caisse.telephone | tel }}">{{ caisse.telephone }}</a>{% else %}<a href="tel:{{ site.coordonnees.telephone | tel }}">{{ site.coordonnees.telephone }}</a> (direction générale) {{ m.aConfirmer("Ligne directe à compléter") }}{% endif %}</dd></div>
+        <div>{{ m.ico("horloge") }}<dt>Horaires</dt><dd>{% if caisse.horaires %}{{ caisse.horaires }}{% else %}Renseignez-vous par téléphone avant de vous déplacer {{ m.aConfirmer("À compléter") }}{% endif %}</dd></div>
+        <div>{{ m.ico("mains") }}<dt>Zone couverte</dt><dd>{{ caisse.regions | join(", ") }}</dd></div>
+      </dl>
+      <p class="actions mt-5">
+        {% if caisse.adresse %}<a class="btn btn--sombre" href="{{ (caisse.adresse + ', Sénégal') | itineraire }}" target="_blank" rel="noopener">{{ m.ico("itineraire") }} Obtenir l'itinéraire<span class="sr-only"> (nouvel onglet)</span></a>{% endif %}
+        <a class="btn btn--contour" href="{{ requete | carte }}" target="_blank" rel="noopener">{{ m.ico("repere") }} Chercher sur la carte<span class="sr-only"> (nouvel onglet)</span></a>
+      </p>
+    </div>
+
+    <div class="revele">
+      <p class="surtitre">Dans votre caisse</p>
+      <h2>Les services proposés</h2>
+      <ul class="autres-solutions autres-solutions--colonne mt-5" role="list">
+        {% for s in collections.solutions %}
+        <li><a class="autre-solution" href="{{ s.url }}">
+          <span class="pastille">{{ m.ico(s.data.icone) }}</span>
+          <span><strong>{{ s.data.title }}</strong><span>{{ s.data.accroche }}</span></span>
+        </a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sable" aria-labelledby="autres-caisses">
+  <div class="conteneur">
+    {{ m.tete("Le réseau", "Les autres caisses de base", "", 2, false, "autres-caisses") }}
+    <ul class="caisses" role="list">
+      {% for a in caisses %}{% if a.id != caisse.id %}
+      <li><a class="autre-solution" href="/agences/{{ a.id }}/">
+        <span class="pastille">{{ m.ico("mains") }}</span>
+        <span><strong>{{ a.nom }}</strong><span>{{ a.regions | join(", ") }}</span></span>
+      </a></li>
+      {% endif %}{% endfor %}
+      <li><a class="autre-solution" href="/agences/">
+        <span class="pastille">{{ m.ico("recherche") }}</span>
+        <span><strong>Tout le réseau</strong><span>Rechercher un point de service</span></span>
+      </a></li>
+    </ul>
+  </div>
+</section>
+
+<script type="application/ld+json">{{ {
+  "@context": "https://schema.org",
+  "@type": "FinancialService",
+  "name": caisse.nom + " — U-IMCEC",
+  "parentOrganization": { "@type": "Organization", "name": site.nom_complet, "url": site.url },
+  "url": ("/agences/" + caisse.id + "/") | absolu(site.url),
+  "telephone": caisse.telephone or site.coordonnees.telephone,
+  "areaServed": caisse.regions,
+  "address": { "@type": "PostalAddress", "streetAddress": caisse.adresse, "addressLocality": caisse.localite, "addressCountry": "SN" }
+} | json | safe }}</script>
+
+{{ m.appelFinal("Un projet " + caisse.ou + " ?", "Écrivez-nous ou appelez la direction générale : nous vous mettons en relation avec " + caisse.nom + ".", "sable") }}

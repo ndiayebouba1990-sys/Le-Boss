@@ -1,0 +1,54 @@
+{
+  "note": "Sources : site officiel uimcec.sn (page d'accueil, consultée dans sa version d'avril 2026) pour l'année de création, les caisses, les agences et les guichets ; entretien du directeur général publié par SOS Faim Luxembourg le 2 juin 2026 pour les régions couvertes et la part du portefeuille dédiée aux femmes.",
+  "liste": [
+    {
+      "valeur": "2001",
+      "libelle": "Année de création",
+      "detail": "Plus de vingt ans au service des communautés",
+      "source": "Site officiel uimcec.sn",
+      "confirme": true
+    },
+    {
+      "valeur": "4",
+      "libelle": "Caisses de base agréées",
+      "detail": "IMCEC Dakar, Thiès, Mbour et Casamance",
+      "source": "Site officiel uimcec.sn",
+      "confirme": true
+    },
+    {
+      "valeur": "19",
+      "libelle": "Agences",
+      "detail": "Essentiellement en milieu rural et périurbain",
+      "source": "Site officiel uimcec.sn",
+      "confirme": true
+    },
+    {
+      "valeur": "53",
+      "libelle": "Guichets",
+      "detail": "Au plus près des populations",
+      "source": "Site officiel uimcec.sn",
+      "confirme": true
+    },
+    {
+      "valeur": "14",
+      "libelle": "Régions couvertes",
+      "detail": "Une présence dans tout le Sénégal",
+      "source": "Entretien du directeur général, SOS Faim, 2 juin 2026",
+      "confirme": true
+    },
+    {
+      "valeur": "+ de 60 %",
+      "libelle": "Du portefeuille dédié aux femmes",
+      "detail": "Jusqu'à 70 % dans certaines agences",
+      "source": "Entretien du directeur général, SOS Faim, 2 juin 2026",
+      "confirme": true
+    },
+    {
+      "valeur": "",
+      "libelle": "Membres et clients",
+      "detail": "Chiffre à communiquer par U-IMCEC, avec sa date de référence",
+      "source": "",
+      "confirme": false
+    }
+  ]
+}

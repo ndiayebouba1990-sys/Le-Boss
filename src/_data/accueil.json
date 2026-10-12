@@ -1,0 +1,133 @@
+{
+  "diapositives": [
+    {
+      "onglet": "Vos projets",
+      "surtitre": "Épargne · Crédit · Proximité",
+      "titre": "Près de vous pour faire grandir vos projets.",
+      "texte": "Depuis 2001, U-IMCEC accompagne les familles, les femmes et les jeunes entrepreneurs du Sénégal avec des solutions d'épargne et de financement adaptées.",
+      "image": "marche-femmes-charrette",
+      "position": "70% 30%",
+      "bouton1": {
+        "libelle": "Découvrir nos solutions",
+        "url": "/solutions/"
+      },
+      "bouton2": {
+        "libelle": "Trouver une agence",
+        "url": "/agences/"
+      }
+    },
+    {
+      "onglet": "Agriculture",
+      "surtitre": "Centre Financier Agricole",
+      "titre": "Nous finançons celles et ceux qui nourrissent le Sénégal.",
+      "texte": "Des agences Agri-fin et des équipes dédiées accompagnent les producteurs dans les zones à fort potentiel agricole.",
+      "image": "champ-niayes-goutte-a-goutte",
+      "position": "50% 60%",
+      "bouton1": {
+        "libelle": "Le financement agricole",
+        "url": "/solutions/financement-agricole/"
+      },
+      "bouton2": {
+        "libelle": "Parler à un conseiller",
+        "url": "/contact/"
+      }
+    },
+    {
+      "onglet": "Pêche",
+      "surtitre": "Aux côtés des acteurs de la mer",
+      "titre": "Pour une pêche plus compétitive.",
+      "texte": "De la pirogue au marché, U-IMCEC soutient les femmes et les hommes qui font vivre la filière.",
+      "image": "pirogues-plage",
+      "position": "60% 72%",
+      "bouton1": {
+        "libelle": "Financer mon activité",
+        "url": "/solutions/credit/"
+      },
+      "bouton2": {
+        "libelle": "Trouver une agence",
+        "url": "/agences/"
+      }
+    }
+  ],
+  "besoins": [
+    {
+      "icone": "tirelire",
+      "titre": "Épargner",
+      "texte": "Mettre de l'argent de côté en sécurité.",
+      "url": "/solutions/epargne/"
+    },
+    {
+      "icone": "projet",
+      "titre": "Financer un projet",
+      "texte": "Étudier un crédit adapté à votre besoin.",
+      "url": "/solutions/credit/"
+    },
+    {
+      "icone": "pousse",
+      "titre": "Développer une activité agricole",
+      "texte": "Un accompagnement dédié au monde rural.",
+      "url": "/solutions/financement-agricole/"
+    },
+    {
+      "icone": "mobile",
+      "titre": "Gérer à distance",
+      "texte": "Carte, application et services mobiles.",
+      "url": "/services-numeriques/"
+    },
+    {
+      "icone": "repere",
+      "titre": "Trouver une agence",
+      "texte": "Localiser le point de service le plus proche.",
+      "url": "/agences/"
+    },
+    {
+      "icone": "bulle",
+      "titre": "Poser une question",
+      "texte": "Un conseiller vous répond et vous oriente.",
+      "url": "/contact/"
+    }
+  ],
+  "mission": {
+    "citation": "Améliorer les revenus et le bien-être des familles à travers l'accès à des services financiers adaptés.",
+    "source": "Extrait de la mission de U-IMCEC",
+    "piliers": [
+      {
+        "icone": "mains",
+        "titre": "Une institution mutualiste",
+        "texte": "U-IMCEC appartient à ses membres : dans chaque caisse, des sociétaires élus siègent au conseil d'administration, au conseil de surveillance et au comité de crédit."
+      },
+      {
+        "icone": "femmes",
+        "titre": "Les femmes et les jeunes d'abord",
+        "texte": "Depuis sa création, U-IMCEC place l'autonomisation économique des femmes et des jeunes micro-entrepreneurs au cœur de son action."
+      },
+      {
+        "icone": "repere",
+        "titre": "Présente là où vous vivez",
+        "texte": "Un réseau implanté essentiellement en milieu rural et périurbain, pour que le service financier soit près de chez vous."
+      }
+    ]
+  },
+  "engagements": [
+    {
+      "icone": "ecoute",
+      "titre": "Vous écouter",
+      "texte": "Chaque projet est unique. Nos conseillers prennent le temps de comprendre votre situation avant de vous proposer une solution."
+    },
+    {
+      "icone": "balance",
+      "titre": "Vous informer clairement",
+      "texte": "Les conditions de nos produits vous sont expliquées en agence, avant tout engagement de votre part."
+    },
+    {
+      "icone": "pousse",
+      "titre": "Vous accompagner dans la durée",
+      "texte": "Formation, appui-conseil, sensibilisation : notre accompagnement ne s'arrête pas au financement."
+    },
+    {
+      "icone": "bouclier",
+      "titre": "Protéger vos données",
+      "texte": "Nous ne vous demanderons jamais votre code PIN ni votre mot de passe par téléphone, par message ou par formulaire."
+    }
+  ]
+}

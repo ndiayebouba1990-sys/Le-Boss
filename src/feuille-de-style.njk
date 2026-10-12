@@ -1,0 +1,13 @@
+---
+permalink: /assets/css/site.css
+eleventyExcludeFromCollections: true
+---
+{%- set css -%}
+{% include "css/01-jetons.css" %}
+{% include "css/02-base.css" %}
+{% include "css/03-composants.css" %}
+{% include "css/04-entete-pied.css" %}
+{% include "css/05-accueil.css" %}
+{% include "css/06-pages.css" %}
+{%- endset -%}
+{{ css | cssmin | safe }}

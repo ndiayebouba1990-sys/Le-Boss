@@ -1,0 +1,125 @@
+---
+layout: layouts/base.njk
+title: "Qui sommes-nous ?"
+titre_seo: "Qui sommes-nous ? Mission, gouvernance et réseau — U-IMCEC Sénégal"
+description: "U-IMCEC, Union des Institutions Mutualistes Communautaires d'Épargne et de Crédit : institution agréée créée en 2001, au service des femmes, des jeunes et du monde rural."
+permalink: /u-imcec/
+image: pirogue-depart-peche
+---
+{%- import "partials/macros.njk" as m with context -%}
+
+{{ m.bandeau("Une institution mutualiste, au service des communautés", "Depuis " + site.reglementaire.creation + ", l'" + site.nom_complet + " accompagne le développement des communautés de base au Sénégal.", "U-IMCEC", [], "pirogue-depart-peche", "", "bas") }}
+
+<section class="section" aria-labelledby="presentation-titre">
+  <div class="conteneur apropos__grille">
+    <div class="revele">
+      <p class="surtitre">Présentation</p>
+      <h2 id="presentation-titre">Une finance qui part des communautés.</h2>
+      <div class="prose mt-4">
+        <p>L'{{ site.nom_complet }} ({{ site.nom }}) est une institution agréée par le {{ site.reglementaire.autorite }} sous le numéro {{ site.reglementaire.agrement }}. Elle est régie par la {{ site.reglementaire.loi }}.</p>
+        <p>Dans son approche, U-IMCEC privilégie la promotion de l'autonomisation économique des femmes et des jeunes, à travers une offre diversifiée de produits et de services, financiers et non financiers.</p>
+        <p>L'union regroupe quatre caisses de base agréées — IMCEC Dakar, IMCEC Thiès, IMCEC Mbour et IMCEC Casamance —, 19 agences et 53 guichets, implantés essentiellement en milieu rural et périurbain.</p>
+      </div>
+      <p class="actions mt-6">
+        <a class="btn btn--sombre" href="/agences/">Découvrir le réseau {{ m.ico("fleche", "ico--fleche") }}</a>
+        <a class="btn btn--contour" href="/solutions/">Nos solutions</a>
+      </p>
+    </div>
+    <div class="apropos__visuel revele">
+      <div class="dome">
+        {{ m.photo("retour-du-marche", "Une femme revient du marché, un sac de provisions à la main", "(min-width: 960px) 480px, 90vw") }}
+        {{ m.credit("retour-du-marche") }}
+      </div>
+      <p class="apropos__encart"><strong>{{ site.reglementaire.creation }}</strong>Année de création de U-IMCEC.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section fond-sombre chiffres" aria-labelledby="mission-titre">
+  <div class="conteneur">
+    <div class="mission-bloc">
+      <p class="surtitre">Notre mission</p>
+      <h2 class="sr-only" id="mission-titre">La mission de U-IMCEC</h2>
+      <blockquote class="citation citation--claire">« Améliorer les revenus et le bien-être des familles à travers l'accès à des services financiers adaptés permettant de développer des activités génératrices de revenus pour principalement les femmes et les jeunes micro-entrepreneurs vivant dans les zones rurales et périurbaines, avec une dynamique soutenue d'autonomie financière. »<cite>Mission de U-IMCEC</cite></blockquote>
+    </div>
+    <ul class="chiffres__grille revele mt-6" role="list">
+      {% for c in chiffres.liste %}{% if c.confirme %}
+      <li class="chiffre">
+        <span class="chiffre__valeur{% if c.valeur | length > 4 %} chiffre__valeur--texte{% endif %}">{{ c.valeur }}</span>
+        <span class="chiffre__libelle">{{ c.libelle }}</span>
+        <span class="chiffre__detail">{{ c.detail }}</span>
+      </li>
+      {% endif %}{% endfor %}
+    </ul>
+    <p class="chiffres__note">{{ chiffres.note }}</p>
+  </div>
+</section>
+
+<section class="section section--creme" aria-labelledby="gouvernance-titre">
+  <div class="conteneur">
+    {{ m.tete("Gouvernance", "Une institution dirigée par ses membres.", "Dans chaque IMCEC, les organes sont constitués de sociétaires élus lors des assemblées générales ordinaires.", 2, false, "gouvernance-titre") }}
+    <ul class="gouvernance" role="list">
+      <li class="revele"><span class="pastille">{{ m.ico("mains") }}</span><h3>Conseil d'administration</h3><p>Il fixe les orientations de la caisse et veille à leur mise en œuvre.</p></li>
+      <li class="revele"><span class="pastille">{{ m.ico("balance") }}</span><h3>Conseil de surveillance</h3><p>Il contrôle la régularité des opérations et le fonctionnement de la caisse.</p></li>
+      <li class="revele"><span class="pastille">{{ m.ico("projet") }}</span><h3>Comité de crédit</h3><p>Il se prononce sur les demandes de crédit des membres.</p></li>
+    </ul>
+    {{ m.noteValidation("Les rôles des trois organes sont décrits selon le fonctionnement habituel des institutions mutualistes : formulation à valider par U-IMCEC. La composition de la direction générale et des organes de l'union peut être ajoutée ici.") }}
+
+    <h3 class="mt-7">Les quatre caisses de base</h3>
+    <ul class="caisses mt-4" role="list">
+      {% for a in agences.liste %}{% if a.type == "caisse" %}
+      <li><a class="autre-solution" href="/agences/{{ a.id }}/">
+        <span class="pastille">{{ m.ico("mains") }}</span>
+        <span><strong>{{ a.nom }}</strong><span>{{ a.regions | join(", ") }}</span></span>
+      </a></li>
+      {% endif %}{% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="engagements" aria-labelledby="engagements-titre">
+  <div class="conteneur">
+    {{ m.tete("Nos engagements", "Trois priorités qui guident notre action.", "", 2, false, "engagements-titre") }}
+    <div class="liste-solutions">
+      <article class="carte revele">
+        <div class="carte__media">{{ m.photo("deux-femmes-marche", "Deux femmes reviennent du marché en portant leurs marchandises", "(min-width: 1100px) 400px, 100vw") }}{{ m.credit("deux-femmes-marche") }}</div>
+        <div class="carte__corps">
+          <h3><a class="carte__lien" href="/solutions/femmes-et-jeunes/">Les femmes et les jeunes</a></h3>
+          <p>Depuis sa création, U-IMCEC privilégie les femmes dans sa stratégie d'intervention et a mis sur pied le Réseau National des Femmes partenaires de IMCEC.</p>
+          <div class="carte__pied"><span class="lien" aria-hidden="true">En savoir plus {{ m.ico("fleche") }}</span></div>
+        </div>
+      </article>
+      <article class="carte revele">
+        <div class="carte__media">{{ m.photo("champ-niayes-rangs", "Rangs de cultures maraîchères dans la zone des Niayes", "(min-width: 1100px) 400px, 100vw") }}{{ m.credit("champ-niayes-rangs") }}</div>
+        <div class="carte__corps">
+          <h3><a class="carte__lien" href="/solutions/financement-agricole/">Le monde rural</a></h3>
+          <p>Le Centre Financier Agricole coordonne le financement de l'agriculture, avec des agences Agri-fin situées dans les zones à fort potentiel agricole.</p>
+          <div class="carte__pied"><span class="lien" aria-hidden="true">En savoir plus {{ m.ico("fleche") }}</span></div>
+        </div>
+      </article>
+      <article class="carte revele">
+        <div class="carte__media">{{ m.photo("marche-femmes-charrette", "Des commerçantes sur un marché sénégalais", "(min-width: 1100px) 400px, 100vw") }}{{ m.credit("marche-femmes-charrette") }}</div>
+        <div class="carte__corps">
+          <h3><a class="carte__lien" href="/agences/">La proximité</a></h3>
+          <p>Un réseau présent dans les 14 régions du pays, essentiellement en milieu rural et périurbain, pour que le service financier soit près de chez vous.</p>
+          <div class="carte__pied"><span class="lien" aria-hidden="true">Trouver une agence {{ m.ico("fleche") }}</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sable" aria-labelledby="partenaires-titre">
+  <div class="conteneur">
+    {{ m.tete("Partenaires", "Ils accompagnent notre action.", "Partenaires techniques et financiers cités dans des publications récentes.", 2, false, "partenaires-titre") }}
+    <ul class="offres" role="list">
+      <li class="offre revele"><h3>ADA (Luxembourg)</h3><p>Accompagnement des jeunes entrepreneurs : financement adapté, formation avec l'incubateur Jokkolabs et suivi après le crédit.</p></li>
+      <li class="offre revele"><h3>SOS Faim Luxembourg</h3><p>Partenaire de U-IMCEC depuis 2025, autour du financement du monde rural, des jeunes et des enjeux environnementaux.</p></li>
+      <li class="offre revele"><h3>BRS (Belgique)</h3><p>Appui au programme des Linguères en faveur des femmes entrepreneures et, auparavant, à la mise en place d'un département d'agrofinance.</p></li>
+      <li class="offre revele"><h3>Kampani (Belgique)</h3><p>Prêt d'un million d'euros, en 2026, pour financer l'équipement des petits producteurs agricoles.</p></li>
+    </ul>
+    {{ m.noteValidation("Liste établie à partir des publications des partenaires eux-mêmes (ADA, SOS Faim, BRS) et de la presse spécialisée (ImpactAlpha). U-IMCEC doit la valider, la compléter et fournir les logos avec l'accord de chaque partenaire.") }}
+  </div>
+</section>
+
+{{ m.appelFinal("Envie de nous rejoindre ?", "Devenez membre de votre caisse et accédez aux solutions d'épargne et de financement de U-IMCEC.", "sable") }}

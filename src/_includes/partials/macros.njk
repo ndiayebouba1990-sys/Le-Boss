@@ -1,0 +1,118 @@
+{# ==========================================================================
+   Macros réutilisables. Import : {% import "partials/macros.njk" as m with context %}
+   ========================================================================== #}
+
+{# Icône de la planche partials/icones.njk #}
+{% macro ico(nom, classe="") -%}
+<svg class="ico{% if classe %} {{ classe }}{% endif %}" aria-hidden="true" focusable="false"><use href="#i-{{ nom }}"/></svg>
+{%- endmacro %}
+
+{# Photographie optimisée (WebP + repli JPEG, dimensions réservées, chargement différé).
+   « nom » = clé de src/_data/images.json ; sinon chemin direct d'une image téléversée. #}
+{% macro photo(nom, alt, sizes="100vw", classe="", paresseux=true) -%}
+{%- set im = images[nom] -%}
+{%- if im -%}
+<picture>
+  <source type="image/webp" sizes="{{ sizes }}" srcset="{% for l in im.largeurs %}/assets/img/photos/{{ nom }}-{{ l }}.webp {{ l }}w{% if not loop.last %}, {% endif %}{% endfor %}">
+  <img src="/assets/img/photos/{{ nom }}-{{ im.repli }}.jpg" alt="{{ alt }}" width="{{ im.w }}" height="{{ im.h }}"{% if classe %} class="{{ classe }}"{% endif %} {% if paresseux %}loading="lazy"{% else %}fetchpriority="high"{% endif %} decoding="async">
+</picture>
+{%- elif nom -%}
+<img src="{{ nom }}" alt="{{ alt }}"{% if classe %} class="{{ classe }}"{% endif %} loading="lazy" decoding="async">
+{%- endif -%}
+{%- endmacro %}
+
+{# Crédit photographique discret, posé sur l'image (obligatoire pour les licences Creative Commons). #}
+{% macro credit(nom) -%}
+{%- set im = images[nom] -%}
+{%- if im and im.auteur -%}
+<a class="credit-photo" href="/credits/#{{ nom }}">{% if im.nature == "illustration" %}Illustration · {% endif %}© {{ im.auteur }}{% if im.licence and im.nature == "illustration" %} · {{ im.licence }}{% endif %}</a>
+{%- endif -%}
+{%- endmacro %}
+
+{# Marqueur visible uniquement en mode prépublication #}
+{% macro aConfirmer(texte="À confirmer") -%}
+{%- if site.prepublication -%}<span class="a-confirmer">{{ texte }}</span>{%- endif -%}
+{%- endmacro %}
+
+{% macro noteValidation(texte) -%}
+{%- if site.prepublication -%}
+<p class="note-validation">{{ ico("info") }}<span><strong>À valider avant publication.</strong> {{ texte }}</span></p>
+{%- endif -%}
+{%- endmacro %}
+
+{# En-tête de section #}
+{% macro tete(surtitre, titre, chapo="", niveau=2, centre=false, id="") -%}
+<div class="tete-section{% if centre %} tete-section--centre{% endif %} revele">
+  <div>
+    <p class="surtitre">{{ surtitre }}</p>
+    <h{{ niveau }}{% if id %} id="{{ id }}"{% endif %}>{{ titre | safe }}</h{{ niveau }}>
+  </div>
+  {% if chapo %}<p class="tete-section__chapo">{{ chapo | safe }}</p>{% endif %}
+</div>
+{%- endmacro %}
+
+{# Carte d'actualité #}
+{% macro carteActu(article, niveau=3, grande=false) -%}
+<article class="carte carte-actu{% if grande %} carte-actu--grande{% endif %} revele">
+  <div class="carte__media">
+    {% set visuel = article.data.image_televersee or article.data.image %}
+    {% if visuel %}
+      {{ photo(visuel, article.data.image_alt or "", "(min-width: 1024px) 600px, 100vw") }}
+      {{ credit(visuel) }}
+    {% else %}
+      <div class="carte-actu__motif" aria-hidden="true"><span>{{ article.data.rubrique }}</span></div>
+    {% endif %}
+  </div>
+  <div class="carte__corps">
+    <p class="carte-actu__meta">
+      <span class="etiquette">{{ article.data.rubrique }}</span>
+      <time datetime="{{ article.date | dateIso }}">{% if article.data.precision == "mois" %}{{ article.date | moisAnnee | capitalize }}{% else %}{{ article.date | dateFr }}{% endif %}</time>
+    </p>
+    <h{{ niveau }}><a class="carte__lien" href="{{ article.url }}">{{ article.data.title }}</a></h{{ niveau }}>
+    <p>{{ article.data.resume }}</p>
+    <div class="carte__pied"><span class="lien" aria-hidden="true">Lire l'article {{ ico("fleche") }}</span></div>
+  </div>
+</article>
+{%- endmacro %}
+
+{# Bandeau d'en-tête des pages intérieures #}
+{% macro bandeau(titre, chapo="", surtitre="", ariane=[], image="", imageAlt="", cadrage="") -%}
+<section class="bandeau-page fond-sombre{% if image %} bandeau-page--photo{% endif %}{% if cadrage %} bandeau-page--{{ cadrage }}{% endif %}">
+  {% if image %}
+  <div class="bandeau-page__fond">{{ photo(image, imageAlt, "100vw", "", false) }}</div>
+  {% endif %}
+  <div class="conteneur bandeau-page__int">
+    <nav class="ariane" aria-label="Fil d'Ariane">
+      <ol>
+        <li><a href="/">Accueil</a></li>
+        {% for etape in ariane %}<li><a href="{{ etape.url }}">{{ etape.libelle }}</a></li>{% endfor %}
+        <li aria-current="page">{{ title or (titre | striptags) }}</li>
+      </ol>
+    </nav>
+    {% if surtitre %}<p class="surtitre">{{ surtitre }}</p>{% endif %}
+    <h1>{{ titre | safe }}</h1>
+    {% if chapo %}<p class="bandeau-page__chapo">{{ chapo | safe }}</p>{% endif %}
+  </div>
+  {% if image %}{{ credit(image) }}{% endif %}
+</section>
+{%- endmacro %}
+
+{# Appel à l'action de fin de page #}
+{% macro appelFinal(titre="Un projet en tête ? Parlons-en.", texte="Nos conseillers vous accueillent dans les caisses et guichets du réseau U-IMCEC pour étudier votre besoin avec vous.", fond="") -%}
+<section class="appel-final{% if fond %} appel-final--{{ fond }}{% endif %}" aria-labelledby="appel-final-titre">
+  <div class="conteneur">
+    <div class="appel-final__carte fond-sombre revele">
+      <div class="appel-final__texte">
+        <p class="surtitre">Passons à l'étape suivante</p>
+        <h2 id="appel-final-titre">{{ titre }}</h2>
+        <p>{{ texte }}</p>
+      </div>
+      <div class="appel-final__actions">
+        <a class="btn btn--primaire" href="/contact/">Contacter U-IMCEC {{ ico("fleche", "ico--fleche") }}</a>
+        <a class="btn btn--clair" href="/agences/">{{ ico("repere") }} Trouver une agence</a>
+        <a class="btn btn--clair" href="tel:{{ site.coordonnees.telephone | tel }}">{{ ico("telephone") }} {{ site.coordonnees.telephone }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+{%- endmacro %}

@@ -1,0 +1,78 @@
+{%- import "partials/macros.njk" as m with context -%}
+{# Recherche d'agence. Variables attendues : locPage (true sur /agences/), locId (suffixe d'identifiants).
+   Les points « verifie: false » ne sont rendus qu'en mode prépublication. #}
+{%- set icones = { siege: "batiment", caisse: "mains", agence: "boutique", guichet: "repere" } -%}
+<div class="localisateur{% if locPage %} localisateur--page{% endif %}" data-localisateur{% if locPage %} data-lire-url{% endif %}>
+  <form class="localisateur__filtres" role="search" aria-label="Rechercher un point de service">
+    <div class="champ">
+      <label for="loc-q-{{ locId }}">Ville, quartier ou caisse</label>
+      <div class="localisateur__recherche">
+        {{ m.ico("recherche") }}
+        <input id="loc-q-{{ locId }}" type="search" name="q" placeholder="Ex. Mbour, Rufisque, Thiès…" autocomplete="off" data-recherche>
+      </div>
+    </div>
+    <div class="champ">
+      <label for="loc-region-{{ locId }}">Région</label>
+      <select id="loc-region-{{ locId }}" name="region" data-region>
+        <option value="">Toutes les régions</option>
+        {% for r in agences.regions %}<option value="{{ r }}">{{ r }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="champ">
+      <label for="loc-type-{{ locId }}">Type de point</label>
+      <select id="loc-type-{{ locId }}" name="type" data-type>
+        <option value="">Tous les types</option>
+        {% for cle, libelle in agences.types %}<option value="{{ cle }}">{{ libelle }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </form>
+
+  <p class="localisateur__etat" role="status" aria-live="polite" data-etat>
+    Saisissez une localité ou choisissez une région pour filtrer la liste.
+  </p>
+
+  <ul class="localisateur__liste" role="list">
+    {% for a in agences.liste %}
+    {% if a.verifie or site.prepublication %}
+    <li class="point" data-point data-regions="{{ a.regions | join('|') }}" data-type-point="{{ a.type }}" data-texte="{{ a.nom }} {{ a.localite }} {{ a.adresse }} {{ a.regions | join(' ') }} {{ agences.types[a.type] }}">
+      <div class="point__tete">
+        <span class="pastille{% if a.type == 'siege' %} pastille--brun{% endif %}">{{ m.ico(icones[a.type]) }}</span>
+        <div>
+          <h3>{% if a.page %}<a href="/agences/{{ a.id }}/">{{ a.nom }}</a>{% else %}{{ a.nom }}{% endif %}</h3>
+          <p class="point__type">{{ agences.types[a.type] }} · {{ a.regions | join(", ") }}{% if not a.verifie %} {{ m.aConfirmer("Source tierce — à confirmer") }}{% endif %}</p>
+        </div>
+      </div>
+      {% if a.adresse or a.telephone or a.horaires %}
+      <dl class="point__infos">
+        {% if a.adresse %}<div>{{ m.ico("repere") }}<dt>Adresse</dt><dd>{{ a.adresse }}</dd></div>{% endif %}
+        {% if a.telephone %}<div>{{ m.ico("telephone") }}<dt>Téléphone</dt><dd><a href="tel:{{ a.telephone | tel }}">{{ a.telephone }}</a></dd></div>{% endif %}
+        {% if a.horaires %}<div>{{ m.ico("horloge") }}<dt>Horaires</dt><dd>{{ a.horaires }}</dd></div>{% endif %}
+      </dl>
+      {% else %}
+      <p class="point__attente">Adresse et horaires communiqués par la direction générale au <a class="lien-texte" href="tel:{{ site.coordonnees.telephone | tel }}">{{ site.coordonnees.telephone }}</a>. {{ m.aConfirmer("Coordonnées à compléter") }}</p>
+      {% endif %}
+      <div class="point__actions">
+        {% if a.adresse %}
+        <a class="btn btn--sombre btn--petit" href="{{ (a.adresse + ', Sénégal') | itineraire }}" target="_blank" rel="noopener">{{ m.ico("itineraire") }} Itinéraire<span class="sr-only"> vers {{ a.nom }} (nouvel onglet)</span></a>
+        <a class="btn btn--contour btn--petit" href="{{ ('U-IMCEC ' + a.adresse + ', Sénégal') | carte }}" target="_blank" rel="noopener">{{ m.ico("repere") }} Voir sur la carte<span class="sr-only"> : {{ a.nom }} (nouvel onglet)</span></a>
+        {% else %}
+        <a class="btn btn--contour btn--petit" href="{{ ('U-IMCEC ' + a.nom + ' ' + a.localite + ', Sénégal') | carte }}" target="_blank" rel="noopener">{{ m.ico("repere") }} Chercher sur la carte<span class="sr-only"> : {{ a.nom }} (nouvel onglet)</span></a>
+        {% if a.page %}<a class="btn btn--sombre btn--petit" href="/agences/{{ a.id }}/">Voir la fiche<span class="sr-only"> de {{ a.nom }}</span></a>{% endif %}
+        {% endif %}
+      </div>
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+
+  <div class="localisateur__vide" data-vide hidden>
+    <p><strong>Nous n'avons pas encore de point de service publié<span data-region-vide></span> pour cette recherche.</strong></p>
+    <p>Le réseau U-IMCEC compte 19 agences et 53 guichets dans les 14 régions du pays. La direction générale vous indique le point de service le plus proche de chez vous.</p>
+    <div class="actions">
+      <a class="btn btn--primaire btn--petit" href="tel:{{ site.coordonnees.telephone | tel }}">{{ m.ico("telephone") }} {{ site.coordonnees.telephone }}</a>
+      <button class="btn btn--contour btn--petit" type="button" data-reinitialiser>Réinitialiser la recherche</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+# Seul contact.php est accessible ; la configuration et les données ne le sont jamais.
+<Files "config.php">
+  Require all denied
+</Files>
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^donnees(/|$) - [F,L]
+</IfModule>

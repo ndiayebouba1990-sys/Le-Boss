@@ -1,0 +1,5 @@
+{
+  "layout": "layouts/article.njk",
+  "permalink": "/actualites/{{ page.fileSlug }}/",
+  "precision": "jour"
+}

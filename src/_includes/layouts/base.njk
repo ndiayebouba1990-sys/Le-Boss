@@ -1,0 +1,76 @@
+{%- import "partials/macros.njk" as m with context -%}
+{#- Titre de l'onglet : « Titre — U-IMCEC », sans suffixe quand le titre est déjà long. -#}
+{%- set titreSeo = titre_seo or ((title if title | length > 55 else title + " — " + site.nom) if title else site.nom) -%}
+{%- set descriptionSeo = description or site.description -%}
+{%- set urlCanonique = page.url | absolu(site.url) -%}
+<!doctype html>
+<html lang="{{ site.langue }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ titreSeo }}</title>
+  <meta name="description" content="{{ descriptionSeo }}">
+  <link rel="canonical" href="{{ urlCanonique }}">
+  {% if site.prepublication or noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
+  <meta name="theme-color" content="#5b4339">
+  <meta name="format-detection" content="telephone=no">
+
+  <meta property="og:type" content="{{ 'article' if layout == 'layouts/article.njk' else 'website' }}">
+  <meta property="og:site_name" content="{{ site.nom }} Sénégal">
+  <meta property="og:locale" content="fr_SN">
+  <meta property="og:title" content="{{ titreSeo }}">
+  <meta property="og:description" content="{{ descriptionSeo }}">
+  <meta property="og:url" content="{{ urlCanonique }}">
+  {% set imagePartage = image or "marche-femmes-charrette" %}
+  {% if images[imagePartage] %}<meta property="og:image" content="{{ ('/assets/img/photos/' + imagePartage + '-1200.jpg') | absolu(site.url) }}">{% endif %}
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <link rel="preload" href="/assets/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/site.css?v={{ build.version }}">
+  <script src="/assets/js/site.js?v={{ build.version }}" defer></script>
+  {% for script in scripts %}<script src="/assets/js/{{ script }}?v={{ build.version }}" defer></script>
+  {% endfor %}
+
+  <script type="application/ld+json">{{ {
+    "@context": "https://schema.org",
+    "@type": "FinancialService",
+    "name": site.nom + " Sénégal",
+    "legalName": site.nom_complet,
+    "url": site.url,
+    "logo": "/assets/img/logo-uimcec-192.png" | absolu(site.url),
+    "image": "/assets/img/logo-uimcec-192.png" | absolu(site.url),
+    "foundingDate": site.reglementaire.creation | string,
+    "telephone": site.coordonnees.telephone,
+    "email": site.coordonnees.email,
+    "address": { "@type": "PostalAddress", "streetAddress": site.coordonnees.adresse_ligne1, "addressLocality": "Dakar", "addressCountry": "SN" },
+    "areaServed": { "@type": "Country", "name": "Sénégal" },
+    "sameAs": [site.reseaux[0].url, site.reseaux[1].url, site.reseaux[2].url]
+  } | json | safe }}</script>
+  {% block entete_extra %}{% endblock %}
+</head>
+<body class="{{ classe_page }}">
+  <a class="evitement" href="#contenu">Aller au contenu principal</a>
+  {% include "partials/icones.njk" %}
+
+  {% if site.prepublication %}
+  <div class="bandeau-prepub" role="note"><strong>Version de travail.</strong> {{ site.prepublication_message }}</div>
+  {% endif %}
+
+  {% include "partials/entete.njk" %}
+
+  <main id="contenu" tabindex="-1">
+    {{ content | safe }}
+  </main>
+
+  {% include "partials/pied.njk" %}
+
+  <button class="retour-haut" type="button" aria-label="Revenir en haut de la page" data-retour-haut>
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevron" transform="rotate(180 12 12)"/></svg>
+  </button>
+</body>
+</html>

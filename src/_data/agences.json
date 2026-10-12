@@ -1,0 +1,260 @@
+{
+  "regions": [
+    "Dakar",
+    "Diourbel",
+    "Fatick",
+    "Kaffrine",
+    "Kaolack",
+    "Kédougou",
+    "Kolda",
+    "Louga",
+    "Matam",
+    "Saint-Louis",
+    "Sédhiou",
+    "Tambacounda",
+    "Thiès",
+    "Ziguinchor"
+  ],
+  "types": {
+    "siege": "Direction générale",
+    "caisse": "Caisse de base",
+    "agence": "Agence",
+    "guichet": "Guichet"
+  },
+  "liste": [
+    {
+      "id": "direction-generale",
+      "nom": "Direction générale U-IMCEC",
+      "type": "siege",
+      "regions": [
+        "Dakar"
+      ],
+      "localite": "Hann Maristes, Dakar",
+      "adresse": "Hann Maristes Extension, lot n° P52, Dakar",
+      "telephone": "+221 33 832 08 55",
+      "email": "uimcec@uimcec.sn",
+      "horaires": "",
+      "verifie": true,
+      "source": "Site officiel uimcec.sn",
+      "page": false
+    },
+    {
+      "id": "imcec-dakar",
+      "nom": "IMCEC Dakar",
+      "type": "caisse",
+      "regions": [
+        "Dakar"
+      ],
+      "localite": "Dakar",
+      "adresse": "",
+      "telephone": "",
+      "email": "",
+      "horaires": "",
+      "verifie": true,
+      "source": "Caisse de base agréée citée par le site officiel — coordonnées à compléter",
+      "page": true,
+      "presentation": "IMCEC Dakar est l'une des quatre caisses de base agréées du réseau U-IMCEC. Elle accueille les habitants, les commerçants et les entrepreneurs de la région de Dakar.",
+      "ou": "à Dakar"
+    },
+    {
+      "id": "imcec-thies",
+      "nom": "IMCEC Thiès",
+      "type": "caisse",
+      "regions": [
+        "Thiès"
+      ],
+      "localite": "Thiès",
+      "adresse": "",
+      "telephone": "",
+      "email": "",
+      "horaires": "",
+      "verifie": true,
+      "source": "Caisse de base agréée citée par le site officiel — coordonnées à compléter",
+      "page": true,
+      "presentation": "IMCEC Thiès est l'une des quatre caisses de base agréées du réseau U-IMCEC. Elle accompagne les familles, les producteurs et les entrepreneurs de la région de Thiès.",
+      "ou": "à Thiès"
+    },
+    {
+      "id": "imcec-mbour",
+      "nom": "IMCEC Mbour",
+      "type": "caisse",
+      "regions": [
+        "Thiès"
+      ],
+      "localite": "Mbour",
+      "adresse": "",
+      "telephone": "",
+      "email": "",
+      "horaires": "",
+      "verifie": true,
+      "source": "Caisse de base agréée citée par le site officiel — coordonnées à compléter",
+      "page": true,
+      "presentation": "IMCEC Mbour est l'une des quatre caisses de base agréées du réseau U-IMCEC. Elle est au service des habitants et des acteurs économiques de Mbour et de la Petite-Côte.",
+      "ou": "à Mbour"
+    },
+    {
+      "id": "imcec-casamance",
+      "nom": "IMCEC Casamance",
+      "type": "caisse",
+      "regions": [
+        "Ziguinchor",
+        "Sédhiou",
+        "Kolda"
+      ],
+      "localite": "Casamance",
+      "adresse": "",
+      "telephone": "",
+      "email": "",
+      "horaires": "",
+      "verifie": true,
+      "source": "Caisse de base agréée citée par le site officiel — coordonnées à compléter",
+      "page": true,
+      "presentation": "IMCEC Casamance est l'une des quatre caisses de base agréées du réseau U-IMCEC. Elle intervient dans le sud du pays, auprès des familles, des producteurs et des entrepreneurs de la Casamance.",
+      "ou": "en Casamance"
+    },
+    {
+      "id": "guichet-rufisque",
+      "nom": "Guichet de Rufisque",
+      "type": "guichet",
+      "regions": [
+        "Dakar"
+      ],
+      "localite": "Rufisque",
+      "adresse": "",
+      "telephone": "",
+      "email": "",
+      "horaires": "",
+      "verifie": true,
+      "source": "Inauguration annoncée par le site officiel (juin 2024) — adresse à compléter",
+      "page": false
+    },
+    {
+      "id": "liberte-6",
+      "nom": "Point de service Liberté VI",
+      "type": "agence",
+      "regions": [
+        "Dakar"
+      ],
+      "localite": "Liberté VI, Dakar",
+      "adresse": "Camp Pénal, lot n° 1, Liberté VI, Dakar",
+      "telephone": "",
+      "email": "",
+      "horaires": "",
+      "verifie": false,
+      "source": "Annuaire tiers Go Africa Online (non daté) — à confirmer par U-IMCEC",
+      "page": false
+    },
+    {
+      "id": "yoff",
+      "nom": "Point de service Yoff",
+      "type": "agence",
+      "regions": [
+        "Dakar"
+      ],
+      "localite": "Yoff, Dakar",
+      "adresse": "Marché de Yoff, Dakar",
+      "telephone": "",
+      "email": "",
+      "horaires": "",
+      "verifie": false,
+      "source": "Annuaire tiers Go Africa Online (non daté) — à confirmer par U-IMCEC",
+      "page": false
+    },
+    {
+      "id": "ouakam",
+      "nom": "Point de service Ouakam",
+      "type": "agence",
+      "regions": [
+        "Dakar"
+      ],
+      "localite": "Ouakam, Dakar",
+      "adresse": "Face au marché de Ouakam, Tally Américain, Dakar",
+      "telephone": "",
+      "email": "",
+      "horaires": "",
+      "verifie": false,
+      "source": "Annuaire tiers Go Africa Online (non daté) — à confirmer par U-IMCEC",
+      "page": false
+    },
+    {
+      "id": "camberene",
+      "nom": "Point de service Cambérène",
+      "type": "agence",
+      "regions": [
+        "Dakar"
+      ],
+      "localite": "Cambérène, Dakar",
+      "adresse": "À côté de la mairie de Cambérène, Dakar",
+      "telephone": "",
+      "email": "",
+      "horaires": "",
+      "verifie": false,
+      "source": "Annuaire tiers Go Africa Online (non daté) — à confirmer par U-IMCEC",
+      "page": false
+    },
+    {
+      "id": "guediawaye-centre",
+      "nom": "Point de service Guédiawaye",
+      "type": "agence",
+      "regions": [
+        "Dakar"
+      ],
+      "localite": "Guédiawaye",
+      "adresse": "Centre de sauvegarde de Guédiawaye",
+      "telephone": "",
+      "email": "",
+      "horaires": "",
+      "verifie": false,
+      "source": "Annuaire tiers Go Africa Online (non daté) — à confirmer par U-IMCEC",
+      "page": false
+    },
+    {
+      "id": "guediawaye-baye-laye",
+      "nom": "Point de service Baye Laye",
+      "type": "agence",
+      "regions": [
+        "Dakar"
+      ],
+      "localite": "Guédiawaye",
+      "adresse": "Carrefour Baye Laye, Guédiawaye",
+      "telephone": "",
+      "email": "",
+      "horaires": "",
+      "verifie": false,
+      "source": "Annuaire tiers Go Africa Online (non daté) — à confirmer par U-IMCEC",
+      "page": false
+    },
+    {
+      "id": "dalifort",
+      "nom": "Point de service Dalifort",
+      "type": "agence",
+      "regions": [
+        "Dakar"
+      ],
+      "localite": "Dalifort, Pikine",
+      "adresse": "Rue 36 et 17, Dalifort, Pikine",
+      "telephone": "",
+      "email": "",
+      "horaires": "",
+      "verifie": false,
+      "source": "Annuaire tiers Go Africa Online (non daté) — à confirmer par U-IMCEC",
+      "page": false
+    },
+    {
+      "id": "bambilor",
+      "nom": "Point de service Bambilor",
+      "type": "agence",
+      "regions": [
+        "Dakar"
+      ],
+      "localite": "Bambilor, Rufisque",
+      "adresse": "Face au marché de Bambilor, Rufisque",
+      "telephone": "",
+      "email": "",
+      "horaires": "",
+      "verifie": false,
+      "source": "Annuaire tiers Go Africa Online (non daté) — à confirmer par U-IMCEC",
+      "page": false
+    }
+  ]
+}

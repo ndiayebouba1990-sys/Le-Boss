@@ -1,0 +1,37 @@
+---
+layout: layouts/base.njk
+title: "Crédits photographiques"
+description: "Auteurs, licences et sources des photographies utilisées sur le site de U-IMCEC."
+permalink: /credits/
+---
+{%- import "partials/macros.njk" as m with context -%}
+
+{{ m.bandeau("Crédits photographiques", "Auteurs, licences et sources de chaque image utilisée sur ce site.", "Informations légales") }}
+
+<section class="section">
+  <div class="conteneur">
+    <div class="prose">
+      <p>Les photographies signalées comme <strong>illustrations</strong> montrent la vie économique du Sénégal : elles ne représentent ni une agence, ni des collaborateurs, ni des clients de U-IMCEC. Elles sont publiées sous licence libre et utilisées dans le respect de ces licences ; certaines ont été recadrées.</p>
+    </div>
+    {{ m.noteValidation("Ces photographies libres de droits remplacent provisoirement les photos officielles, le site uimcec.sn étant inaccessible au moment de la réalisation. À terme, privilégier des photographies de U-IMCEC (agences, équipes, événements), prises avec l'autorisation des personnes représentées.") }}
+
+    <ul class="credits mt-6" role="list">
+      {% for nom, im in images %}
+      <li class="credit-fiche" id="{{ nom }}">
+        <img src="/assets/img/photos/{{ nom }}-480.webp" alt="" width="240" height="180" loading="lazy" decoding="async">
+        <div>
+          <h2>{{ im.titre }}</h2>
+          <p>{% if im.nature == "illustration" %}Illustration{% else %}Visuel officiel{% endif %} · © {{ im.auteur }}{% if im.date %} · {{ im.date }}{% endif %}</p>
+          <p>{% if im.licence_url %}<a class="lien-texte" href="{{ im.licence_url }}" target="_blank" rel="noopener license">{{ im.licence }}</a>{% else %}{{ im.licence }}{% endif %}
+          · <a class="lien-texte" href="{{ im.source }}" target="_blank" rel="noopener">{{ im.origine }}<span class="sr-only"> : page source de « {{ im.titre }} » (nouvel onglet)</span></a></p>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <div class="prose mt-7">
+      <h2>Logo et identité visuelle</h2>
+      <p>Le logo de U-IMCEC est la propriété de l'institution. Les polices de caractères Bricolage Grotesque et Figtree sont distribuées sous licence SIL Open Font License 1.1.</p>
+    </div>
+  </div>
+</section>

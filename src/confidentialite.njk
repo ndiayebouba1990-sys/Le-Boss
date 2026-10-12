@@ -1,0 +1,49 @@
+---
+layout: layouts/base.njk
+title: "Politique de confidentialité"
+description: "Comment U-IMCEC collecte, utilise et protège les données personnelles transmises via son site internet."
+permalink: /confidentialite/
+---
+{%- import "partials/macros.njk" as m with context -%}
+
+{{ m.bandeau("Politique de confidentialité", "Quelles données sont collectées sur ce site, pourquoi, et quels sont vos droits.", "Protection des données") }}
+
+<section class="section">
+  <div class="conteneur conteneur--etroit">
+    {{ m.noteValidation("Modèle rédigé au regard de la loi sénégalaise n° 2008-12 du 25 janvier 2008 sur la protection des données à caractère personnel. À faire valider par le service juridique de U-IMCEC ; les durées de conservation et les formalités auprès de la CDP sont à confirmer.") }}
+    <div class="prose">
+      <h2>Qui est responsable de vos données ?</h2>
+      <p>Le responsable du traitement est l'{{ site.nom_complet }} ({{ site.nom }}), {{ site.coordonnees.adresse_ligne1 }}, Dakar, Sénégal.</p>
+
+      <h2>Quelles données collectons-nous ?</h2>
+      <p>Ce site ne collecte des données personnelles que lorsque vous utilisez le formulaire de contact :</p>
+      <ul>
+        <li>votre nom ;</li>
+        <li>votre numéro de téléphone ;</li>
+        <li>votre adresse e-mail et votre localité, si vous les indiquez ;</li>
+        <li>l'objet et le contenu de votre message.</li>
+      </ul>
+      <p>Le site n'utilise ni cookie publicitaire, ni outil de suivi de votre navigation. Les polices de caractères et les images sont servies directement depuis ce site, sans appel à des services tiers.</p>
+
+      <h2>Pourquoi ces données ?</h2>
+      <p>Elles servent uniquement à répondre à votre demande et à vous orienter vers la caisse ou le service compétent. Elles sont traitées sur la base de votre consentement, que vous donnez en cochant la case prévue dans le formulaire.</p>
+
+      <h2>Qui y a accès ?</h2>
+      <p>Vos données sont destinées aux services de {{ site.nom }} et, si nécessaire, à la caisse du réseau concernée par votre demande. Elles ne sont ni vendues ni cédées à des tiers.</p>
+
+      <h2>Combien de temps sont-elles conservées ?</h2>
+      <p>Les demandes reçues via le formulaire sont conservées le temps nécessaire à leur traitement. {{ m.aConfirmer("Durée de conservation à préciser") }}</p>
+
+      <h2>Ce que nous ne vous demanderons jamais</h2>
+      <p>N'indiquez jamais de mot de passe, de code PIN, de numéro de carte ou de numéro de compte dans le formulaire de contact. Par précaution, toute longue suite de chiffres ressemblant à un numéro de carte est automatiquement masquée avant l'envoi de votre message.</p>
+
+      <h2>Quels sont vos droits ?</h2>
+      <p>Conformément à la loi n° 2008-12 du 25 janvier 2008 sur la protection des données à caractère personnel, vous disposez d'un droit d'accès, de rectification, d'opposition et de suppression des données qui vous concernent.</p>
+      <p>Pour exercer ces droits, écrivez à <a href="mailto:{{ site.coordonnees.email }}">{{ site.coordonnees.email }}</a> ou à l'adresse postale de la direction générale. Vous pouvez également saisir la Commission de Protection des Données Personnelles (CDP) du Sénégal.</p>
+      {% if site.mentions.declaration_cdp %}<p>Formalité accomplie auprès de la CDP : {{ site.mentions.declaration_cdp }}.</p>{% endif %}
+
+      <h2>Liens vers des services tiers</h2>
+      <p>Les boutons « Itinéraire » et « Voir sur la carte » ouvrent Google Maps ; le bouton de téléchargement de l'application ouvre Google Play. Ces services appliquent leur propre politique de confidentialité. Aucune donnée ne leur est transmise tant que vous ne cliquez pas sur ces liens.</p>
+    </div>
+  </div>
+</section>

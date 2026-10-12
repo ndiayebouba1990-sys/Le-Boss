@@ -1,0 +1,248 @@
+/* ==========================================================================
+   Pages intérieures : bandeau, solutions, agences, actualités, contact, textes
+   ========================================================================== */
+
+/* — Bandeau d'en-tête — */
+.bandeau-page { position: relative; isolation: isolate; overflow: hidden; }
+.bandeau-page::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: -140px;
+  bottom: -300px;
+  width: 520px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 60px solid rgba(255, 136, 14, 0.16);
+  box-shadow: 0 0 0 60px rgba(255, 136, 14, 0.06);
+  pointer-events: none;
+}
+.bandeau-page__fond { position: absolute; inset: 0; z-index: -2; }
+.bandeau-page__fond img { width: 100%; height: 100%; object-fit: cover; }
+.bandeau-page--bas .bandeau-page__fond img { object-position: 50% 78%; }
+.bandeau-page__fond::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(42, 30, 25, 0.93) 0%, rgba(61, 44, 37, 0.82) 45%, rgba(61, 44, 37, 0.45) 100%);
+}
+.bandeau-page__int { padding-block: clamp(2rem, 1.4rem + 3vw, 3.25rem) clamp(3rem, 2rem + 5vw, 5.5rem); }
+.bandeau-page--photo .bandeau-page__int { padding-bottom: clamp(4rem, 3rem + 6vw, 7.5rem); }
+.bandeau-page .ariane { margin-bottom: clamp(2rem, 1.5rem + 3vw, 4rem); color: rgba(255, 255, 255, 0.75); }
+.bandeau-page h1 { max-width: 20ch; }
+.bandeau-page__chapo { max-width: 58ch; margin-top: 1.25rem; font-size: var(--t-chapo); color: rgba(255, 255, 255, 0.88); }
+.bandeau-page .actions { margin-top: 2rem; }
+
+/* — Texte éditorial — */
+.prose { max-width: 70ch; }
+.prose > * + * { margin-top: 1.1em; }
+.prose h2 { margin-top: 2.2em; font-size: clamp(1.5rem, 1.3rem + 1vw, 2rem); }
+.prose h3 { margin-top: 1.8em; }
+.prose ul, .prose ol { padding-left: 1.3rem; }
+.prose li + li { margin-top: 0.45em; }
+.prose li::marker { color: var(--orange-fonce); font-weight: 700; }
+.prose blockquote { margin: 1.8em 0; padding-left: 1.4rem; border-left: 4px solid var(--orange); font-family: var(--police-titre); font-size: 1.3rem; font-weight: 600; line-height: 1.35; color: var(--brun); }
+.prose hr { border: 0; border-top: 1px solid var(--ligne); margin-block: 2.5rem; }
+
+/* — Page Solutions (liste) — */
+.liste-solutions { display: grid; gap: 1.25rem; }
+@media (min-width: 760px) { .liste-solutions { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .liste-solutions { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* — Page d'une solution : parcours en étapes — */
+.solution__grille { display: grid; gap: clamp(2rem, 1.5rem + 3vw, 4.5rem); align-items: start; }
+.solution__corps > section + section { margin-top: clamp(2.75rem, 2rem + 3vw, 4.25rem); }
+.solution__corps h2 { display: flex; align-items: baseline; gap: 0.85rem; margin-bottom: 1.25rem; font-size: clamp(1.5rem, 1.3rem + 1.1vw, 2.1rem); }
+.solution__corps h2 .num {
+  flex: none;
+  font-family: var(--police-texte);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--orange-texte);
+  transform: translateY(-0.35em);
+}
+.grille-publics { display: grid; gap: 0.75rem; list-style: none; }
+.grille-publics li { display: flex; gap: 0.85rem; align-items: center; padding: 0.9rem 1.1rem; border-radius: var(--r-m); background: var(--sable-100); font-weight: 600; color: var(--encre); }
+.grille-publics .ico { color: var(--orange-fonce); }
+@media (min-width: 640px) { .grille-publics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.offres { display: grid; gap: 0.85rem; list-style: none; }
+.offre { padding: 1.25rem 1.4rem; border: 1px solid var(--ligne); border-radius: var(--r-m); background: var(--blanc); }
+.offre h3 { margin-bottom: 0.35rem; font-size: 1.15rem; }
+.offre p { color: var(--gris); font-size: 0.98rem; }
+.offre__source { display: block; margin-top: 0.6rem; font-size: 0.8rem; color: var(--gris); }
+
+.encart-conditions { display: flex; gap: 1rem; align-items: flex-start; padding: 1.25rem 1.4rem; border-radius: var(--r-m); background: var(--sable-100); border-left: 4px solid var(--orange); }
+.encart-conditions .ico { margin-top: 0.15rem; color: var(--orange-fonce); }
+.encart-conditions p { font-size: 0.98rem; }
+
+.etapes { display: grid; gap: 0; list-style: none; counter-reset: etape; }
+.etape { position: relative; display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 1.1rem; padding-bottom: 1.75rem; counter-increment: etape; }
+.etape::before {
+  content: counter(etape);
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--brun);
+  color: var(--blanc);
+  font-family: var(--police-titre);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.etape:not(:last-child)::after { content: ""; position: absolute; left: calc(1.5rem - 1px); top: 3.4rem; bottom: 0.4rem; width: 2px; background: var(--ligne); }
+.etape h3 { margin: 0.55rem 0 0.3rem; font-size: 1.15rem; }
+.etape p { color: var(--gris); font-size: 0.98rem; }
+
+/* Carte de contact collante */
+.carte-contact {
+  padding: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  border-radius: var(--r-l);
+  background: var(--brun-profond);
+  color: var(--texte-clair);
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+}
+.carte-contact::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: -110px;
+  top: -150px;
+  width: 300px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 44px solid rgba(255, 136, 14, 0.18);
+}
+.carte-contact h2 { margin-bottom: 0.6rem; font-size: 1.55rem; color: var(--blanc); }
+.carte-contact p { font-size: 0.97rem; }
+.carte-contact .actions { flex-direction: column; margin-top: 1.5rem; }
+.carte-contact__ligne { display: flex; gap: 0.7rem; align-items: center; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--ligne-sombre); font-weight: 700; color: var(--blanc); }
+.carte-contact__ligne .ico { color: var(--orange); }
+@media (min-width: 1000px) {
+  .solution__grille { grid-template-columns: minmax(0, 1fr) 22.5rem; }
+  .solution__aside { position: sticky; top: calc(var(--hauteur-entete) + 1.5rem); }
+}
+
+.autres-solutions { display: grid; gap: 0.75rem; list-style: none; }
+@media (min-width: 700px) { .autres-solutions { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .autres-solutions { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.autre-solution { display: flex; gap: 0.9rem; align-items: center; height: 100%; padding: 1rem 1.15rem; border: 1px solid var(--ligne); border-radius: var(--r-m); background: var(--blanc); transition: border-color 0.3s, transform 0.3s var(--doux), box-shadow 0.3s; }
+.autre-solution:hover { border-color: var(--terre); transform: translateY(-3px); box-shadow: var(--ombre-1); }
+.autre-solution strong { display: block; font-family: var(--police-titre); font-size: 1.08rem; color: var(--encre); }
+.autre-solution span span { display: block; font-size: 0.88rem; color: var(--gris); line-height: 1.4; }
+
+/* — Services numériques (page) — */
+.services-num { display: grid; gap: 1.25rem; }
+.service-fiche { display: grid; gap: 1rem; padding: clamp(1.4rem, 1.1rem + 1.4vw, 2.1rem); border: 1px solid var(--ligne); border-radius: var(--r-l); background: var(--blanc); scroll-margin-top: calc(var(--hauteur-entete) + 1.5rem); }
+.service-fiche__tete { display: flex; gap: 1rem; align-items: center; }
+.service-fiche h2 { font-size: clamp(1.35rem, 1.2rem + 0.8vw, 1.75rem); }
+.service-fiche__resume { margin: 0.1rem 0 0; font-size: 0.95rem; font-weight: 600; color: var(--orange-texte); }
+.service-fiche p { color: var(--texte); }
+.service-fiche__source { font-size: 0.8rem; color: var(--gris); }
+@media (min-width: 900px) { .services-num { grid-template-columns: repeat(2, minmax(0, 1fr)); } .service-fiche--large { grid-column: 1 / -1; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 2.5rem; align-items: center; } }
+.securite { display: grid; gap: 1.5rem; padding: clamp(1.5rem, 1.2rem + 2vw, 2.75rem); border-radius: var(--r-l); }
+@media (min-width: 900px) { .securite { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); align-items: center; gap: 3rem; } }
+
+/* — Localisateur d'agences — */
+.localisateur { border: 1px solid var(--ligne); border-radius: var(--r-l); background: var(--blanc); box-shadow: var(--ombre-1); overflow: hidden; }
+.localisateur__filtres { display: grid; gap: 0.9rem; padding: clamp(1.1rem, 0.9rem + 1vw, 1.6rem); background: var(--sable-50); border-bottom: 1px solid var(--ligne); }
+.localisateur__recherche { position: relative; }
+.localisateur__recherche .ico { position: absolute; left: 1rem; top: 50%; width: 1.25rem; height: 1.25rem; transform: translateY(-50%); color: var(--gris); pointer-events: none; }
+.localisateur__recherche input { padding-left: 2.9rem; }
+.localisateur__etat { margin: 0; padding: 0.9rem clamp(1.1rem, 0.9rem + 1vw, 1.6rem); border-bottom: 1px solid var(--ligne); font-size: var(--t-petit); font-weight: 600; color: var(--gris); }
+.localisateur__liste { display: grid; list-style: none; max-height: 34rem; overflow-y: auto; overscroll-behavior: contain; }
+.localisateur--page .localisateur__liste { max-height: none; }
+.point { display: grid; gap: 0.75rem; padding: 1.15rem clamp(1.1rem, 0.9rem + 1vw, 1.6rem); border-bottom: 1px solid var(--ligne); }
+.point:last-child { border-bottom: 0; }
+.point__tete { display: flex; gap: 0.9rem; align-items: flex-start; }
+.point__tete .pastille { width: 2.75rem; height: 2.75rem; }
+.point h3 { font-size: 1.12rem; }
+.point__type { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.6rem; margin: 0.25rem 0 0; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--orange-texte); }
+.point__infos { display: grid; gap: 0.35rem; margin: 0; font-size: 0.95rem; color: var(--texte); }
+.point__infos div { display: flex; gap: 0.6rem; align-items: flex-start; }
+.point__infos .ico { width: 1.1rem; height: 1.1rem; margin-top: 0.22rem; color: var(--orange-fonce); }
+.point__infos dt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.point__infos dd { margin: 0; }
+.point__infos a { text-decoration: underline; text-underline-offset: 3px; }
+.point__attente { font-size: 0.92rem; color: var(--gris); }
+.point__actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.localisateur__vide { padding: clamp(1.5rem, 1.2rem + 2vw, 2.5rem); text-align: center; color: var(--texte); }
+.localisateur__vide p { max-width: 46ch; margin-inline: auto; }
+.localisateur__vide .actions { justify-content: center; margin-top: 1.25rem; }
+@media (min-width: 560px) {
+  .localisateur__filtres { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; }
+  .localisateur__filtres .champ:first-child { grid-column: 1 / -1; }
+}
+@media (min-width: 900px) {
+  .localisateur--page .localisateur__filtres { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr); }
+  .localisateur--page .localisateur__filtres .champ:first-child { grid-column: auto; }
+  .localisateur--page .point { grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 1.5rem; }
+  .localisateur--page .point__infos, .localisateur--page .point__attente { grid-column: 1; padding-left: 3.65rem; }
+  .localisateur--page .point__actions { grid-column: 2; grid-row: 1 / span 2; flex-direction: column; align-items: stretch; }
+}
+
+/* Fiche d'une caisse */
+.fiche-grille { display: grid; gap: clamp(2rem, 1.5rem + 3vw, 4rem); align-items: start; }
+.fiche-infos { display: grid; gap: 0; margin: 0; border: 1px solid var(--ligne); border-radius: var(--r-l); overflow: hidden; }
+.fiche-infos div { display: grid; grid-template-columns: 2.4rem minmax(0, 1fr); gap: 0.25rem 0.75rem; padding: 1.15rem 1.35rem; border-bottom: 1px solid var(--ligne); }
+.fiche-infos div:last-child { border-bottom: 0; }
+.fiche-infos .ico { grid-row: span 2; width: 1.4rem; height: 1.4rem; margin-top: 0.2rem; color: var(--orange-fonce); }
+.fiche-infos dt { font-size: var(--t-mini); font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris); }
+.fiche-infos dd { margin: 0; font-weight: 600; color: var(--encre); }
+@media (min-width: 960px) { .fiche-grille { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); } }
+
+/* — Actualités — */
+.article__tete { max-width: 52rem; }
+.article__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; margin-top: 1.5rem; font-size: var(--t-petit); color: rgba(255, 255, 255, 0.8); }
+.article__image { position: relative; margin: clamp(-3.5rem, -2rem - 4vw, -2.5rem) auto 0; border-radius: var(--r-l); overflow: hidden; box-shadow: var(--ombre-2); aspect-ratio: 16 / 8; background: var(--sable-200); }
+.article__image img { width: 100%; height: 100%; object-fit: cover; }
+.article__legende { margin-top: 0.75rem; font-size: 0.84rem; color: var(--gris); }
+.article__corps { padding-block: clamp(2.5rem, 2rem + 3vw, 4.5rem); }
+.article__source { display: flex; gap: 1rem; align-items: flex-start; margin-top: 2.5rem; padding: 1.25rem 1.4rem; border-radius: var(--r-m); background: var(--sable-100); font-size: 0.97rem; }
+.article__source .ico { margin-top: 0.15rem; color: var(--orange-fonce); }
+
+/* — Contact — */
+.contact__grille { display: grid; gap: clamp(2rem, 1.5rem + 3vw, 4rem); align-items: start; }
+.formulaire { display: grid; gap: 1.15rem; padding: clamp(1.4rem, 1.1rem + 2vw, 2.5rem); border: 1px solid var(--ligne); border-radius: var(--r-l); background: var(--blanc); box-shadow: var(--ombre-1); }
+.formulaire__duo { display: grid; gap: 1.15rem; }
+.formulaire__pied { display: grid; gap: 1rem; }
+.formulaire__note { font-size: 0.86rem; color: var(--gris); }
+.coordonnees { display: grid; gap: 0; list-style: none; }
+.coordonnee { display: flex; gap: 1rem; align-items: flex-start; padding-block: 1.15rem; border-bottom: 1px solid var(--ligne); }
+.coordonnee:first-child { padding-top: 0; }
+.coordonnee small { display: block; font-size: var(--t-mini); font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris); }
+.coordonnee strong, .coordonnee a { font-weight: 700; color: var(--encre); overflow-wrap: anywhere; }
+.coordonnee a:hover { color: var(--orange-texte); }
+@media (min-width: 620px) { .formulaire__duo { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .contact__grille { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); } }
+
+/* — Institution — */
+.gouvernance { display: grid; gap: 1rem; list-style: none; }
+.gouvernance li { padding: 1.4rem; border-radius: var(--r-m); background: var(--blanc); border: 1px solid var(--ligne); }
+.gouvernance h3 { margin: 0.9rem 0 0.4rem; font-size: 1.15rem; }
+.gouvernance p { color: var(--gris); font-size: 0.96rem; }
+@media (min-width: 760px) { .gouvernance { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.caisses { display: grid; gap: 0.75rem; list-style: none; }
+@media (min-width: 640px) { .caisses { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1040px) { .caisses { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* — Crédits photographiques — */
+.credits { display: grid; gap: 1rem; list-style: none; }
+.credit-fiche { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 1.1rem; align-items: center; padding: 0.9rem; border: 1px solid var(--ligne); border-radius: var(--r-m); scroll-margin-top: calc(var(--hauteur-entete) + 1.5rem); }
+.credit-fiche img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--r-s); }
+.credit-fiche h2 { font-family: var(--police-texte); font-size: 1rem; font-weight: 700; letter-spacing: 0; line-height: 1.35; overflow-wrap: anywhere; }
+.credit-fiche p { margin: 0.25rem 0 0; font-size: 0.9rem; color: var(--gris); }
+@media (min-width: 860px) { .credits { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* — Erreur 404 & plan du site — */
+.page-erreur { display: grid; place-items: center; min-height: 60vh; padding-block: var(--section); text-align: center; }
+.page-erreur__code { font-family: var(--police-titre); font-size: clamp(5rem, 3rem + 14vw, 11rem); font-weight: 800; line-height: 0.9; letter-spacing: -0.05em; color: var(--orange); }
+.page-erreur .actions { justify-content: center; margin-top: 2rem; }
+.plan { display: grid; gap: 2rem; }
+.plan h2 { margin-bottom: 0.8rem; font-size: 1.3rem; }
+.plan ul { display: grid; gap: 0.4rem; list-style: none; }
+@media (min-width: 760px) { .plan { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

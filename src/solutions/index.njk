@@ -1,0 +1,57 @@
+---
+layout: layouts/base.njk
+title: "Nos solutions"
+titre_seo: "Solutions d'épargne et de crédit — U-IMCEC Sénégal"
+description: "Épargne, crédit, financement agricole, accompagnement des femmes et des jeunes, assurances : toutes les solutions financières de U-IMCEC au Sénégal."
+permalink: /solutions/
+eleventyExcludeFromCollections: true
+---
+{%- import "partials/macros.njk" as m with context -%}
+
+{{ m.bandeau("Des solutions pour chaque projet", "Épargner, financer une activité, sécuriser une campagne agricole : choisissez votre besoin, nous vous expliquons la solution et les démarches.", "Nos solutions", [], "etal-marche-vendeuses", "") }}
+
+<section class="section" aria-labelledby="liste-titre">
+  <div class="conteneur">
+    <h2 class="sr-only" id="liste-titre">Toutes nos solutions</h2>
+    <div class="liste-solutions">
+      {% for s in collections.solutions %}
+      <article class="carte carte-solution{% if not s.data.image %} carte-solution--sans-photo{% endif %} revele">
+        {% if s.data.image %}
+        <div class="carte__media">
+          {{ m.photo(s.data.image, s.data.image_alt, "(min-width: 1100px) 400px, (min-width: 760px) 50vw, 100vw") }}
+          <span class="carte-solution__num">{{ m.ico(s.data.icone) }}</span>
+          {{ m.credit(s.data.image) }}
+        </div>
+        {% endif %}
+        <div class="carte__corps">
+          {% if not s.data.image %}<span class="pastille">{{ m.ico(s.data.icone) }}</span>{% endif %}
+          <h3><a class="carte__lien" href="{{ s.url }}">{{ s.data.title }}</a></h3>
+          <p>{{ s.data.resume }}</p>
+          <div class="carte__pied"><span class="lien" aria-hidden="true">En savoir plus {{ m.ico("fleche") }}</span></div>
+        </div>
+      </article>
+      {% endfor %}
+      <article class="carte carte-solution carte-solution--sans-photo revele">
+        <div class="carte__corps">
+          <span class="pastille">{{ m.ico("mobile") }}</span>
+          <h3><a class="carte__lien" href="/services-numeriques/">Services numériques</a></h3>
+          <p>{{ numerique.intro }}</p>
+          <div class="carte__pied"><span class="lien" aria-hidden="true">En savoir plus {{ m.ico("fleche") }}</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sable" aria-labelledby="parcours-titre">
+  <div class="conteneur">
+    {{ m.tete("Comment ça se passe ?", "Quatre étapes, un conseiller à vos côtés.", "Quelle que soit la solution, votre demande se prépare en agence, avec un conseiller qui vous explique les conditions avant tout engagement.", 2, false, "parcours-titre") }}
+    <ol class="etapes conteneur--etroit" role="list">
+      {% for e in collections.solutions[0].data.etapes %}
+      <li class="etape revele"><div><h3>{{ e.titre }}</h3><p>{{ e.texte }}</p></div></li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+{{ m.appelFinal("Vous ne savez pas quelle solution choisir ?", "Décrivez votre besoin : un conseiller vous oriente vers la solution et la caisse qui vous correspondent.", "sable") }}
