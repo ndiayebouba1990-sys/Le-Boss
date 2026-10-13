@@ -30,6 +30,8 @@ jobs:
         run: npm ci
 
       - name: Build
+        env:
+          PATH_PREFIX: /Le-Boss/
         run: npm run build
 
       - name: Upload artifact
